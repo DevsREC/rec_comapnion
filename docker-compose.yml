@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+  server:
+    build: ./server
+    links:
+      - db
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./server/:/app
+    # command:  python3 main.py
+    # command: flask --app main --debug run
+
+  db:
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d/:ro
