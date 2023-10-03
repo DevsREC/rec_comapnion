@@ -2,6 +2,13 @@ from flask import Flask
 
 app = Flask(__name__)
 
+# TODO
+# Create response endpoint
+# send json as resonse
+
+# make file upload
+# read from excel file
+
 
 @app.route("/")
 def hello_world():
