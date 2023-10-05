@@ -26,3 +26,10 @@ in your phone using PWA on where your next class is located.
 - [ ] AR route to your next class
 
 ###### An REC companion app made for REC students by REC students
+
+# TODO
+
+- [ ] read from excel and write to db
+- [ ]  
+
+
