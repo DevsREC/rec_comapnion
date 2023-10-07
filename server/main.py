@@ -1,14 +1,49 @@
-from flask import Flask, request, jsonify
-
+import os.path
+from flask import Flask, render_template, request, redirect, flash, jsonify
+from werkzeug.utils import secure_filename
+ 
 app = Flask(__name__)
+app.secret_key = "secret"
+
+
+allowed_extensions = ['.xlsx']
+
+UPLOAD_PATH = os.path.join(os.getcwd(), 'timetable_upload')
 
 # TODO
 # Create response endpoint
-# send json as resonse
+# send json as repsonse
 
-# make file upload
+# make file upload - Done
 # read from excel file
 
+@app.route('/upload', methods = ['GET'])
+def index():
+    return render_template('upload.html')
+
+@app.route('/upload', methods=['POST'])
+def upload_files():
+    if 'file' not in request.files:
+        flash('No file part')
+        return redirect('upload')
+ 
+    file = request.files['file']
+    # obtaining the name of the destination file
+    filename = file.filename
+    if filename == '':
+        flash('No file selected for uploading')
+        return redirect('upload')
+    else:
+        file_ext = os.path.splitext(filename)[1]        #Extracting extension
+        if file_ext in allowed_extensions:
+            secure_fname = secure_filename(filename)
+            file.save(os.path.join(UPLOAD_PATH, secure_fname))
+            flash('File uploaded successfully')
+            return redirect('name')
+        else:
+            flash('Not allowed file type')
+            return redirect('upload')
+ 
 
 def create_tt():
     # TODO add parameters
@@ -21,7 +56,7 @@ def create_tt():
     class_name = "5-it-b"  # sem dep sec
     classes = {
         days[0]: [
-            ["ITA1581", "ComputerNetworks"],
+            ["ITA1581", "ComputerNetwork"],
             ["ITA1581", "ComputerNetworks"],
             ["break", "break"],
             ["ITA1581", "ComputerNetworks"],
