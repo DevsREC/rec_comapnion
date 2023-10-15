@@ -1,0 +1,305 @@
+{
+    "CLASS_NAME": "2-CSD-",
+    "PERIODS": {
+        "TUESDAY": [
+            [
+                "CB19343 - SE",
+                "A302",
+                "Software Engineering",
+                "1",
+                "8:00 \u2013 9:00"
+            ],
+            [
+                "CB19343 - SE",
+                "A302",
+                "Software Engineering",
+                "2",
+                "9:00 \u2013 9:50"
+            ],
+            [
+                "BREAK",
+                "9:50 \u2013 10:10"
+            ],
+            [
+                "GE19301 - LSE",
+                "A302",
+                "Life Science for Engineers",
+                "3",
+                "10:10 \u2013 11:00"
+            ],
+            [
+                "CD19301 - CD",
+                "A302",
+                "Computer Design",
+                "4",
+                "11:00 \u2013 11:50"
+            ],
+            [
+                "CD19342 - DPP",
+                "A302",
+                "Design Processes & Perspectives",
+                "5/L",
+                "11:50 \u2013 12:30/12.40"
+            ],
+            [
+                "LUNCH",
+                "L/5",
+                "12:30/12.40 \u2013 1:20"
+            ],
+            [
+                "CS19342 OOPS LAB/  /CD19342 DPP LAB",
+                "TLFL5/JL1",
+                "LAB",
+                "6",
+                "1:20 \u2013 2:10"
+            ],
+            [
+                "CS19342 OOPS LAB/  /CD19342 DPP LAB",
+                "TLFL5/JL1",
+                "LAB",
+                "7",
+                "2:10 \u2013 3:00"
+            ]
+        ],
+        "WEDNESDAY": [
+            [
+                "CD19301 - CD",
+                "A302",
+                "Computer Design",
+                "1",
+                "8:00 \u2013 9:00"
+            ],
+            [
+                "CS19342 - OOPS",
+                "A302",
+                "Object Oriented Programming Paradigm",
+                "2",
+                "9:00 \u2013 9:50"
+            ],
+            [
+                "BREAK",
+                "9:50 \u2013 10:10"
+            ],
+            [
+                "CS19342 OOPS LAB / /CB19343 SE LAB",
+                "TLFL5/TLFL4",
+                "LAB",
+                "3",
+                "10:10 \u2013 11:00"
+            ],
+            [
+                "CS19342 OOPS LAB / /CB19343 SE LAB",
+                "TLFL5/TLFL4",
+                "LAB",
+                "4",
+                "11:00 \u2013 11:50"
+            ],
+            [
+                "LUNCH",
+                "5/L",
+                "11:50 \u2013 12:30/12.40"
+            ],
+            [
+                "MC19301 - EITK",
+                "A302",
+                "Essence of Indian Traditional Knowledge",
+                "L/5",
+                "12:30/12.40 \u2013 1:20"
+            ],
+            [
+                "CD19342 - DPP",
+                "A302",
+                "Design Processes & Perspectives",
+                "6",
+                "1:20 \u2013 2:10"
+            ],
+            [
+                "MA19154 - DM",
+                "A302",
+                "Discrete Mathematics",
+                "7",
+                "2:10 \u2013 3:00"
+            ]
+        ],
+        "THURSDAY": [
+            [
+                "CD19342 - DPP",
+                "A202",
+                "Design Processes & Perspectives",
+                "1",
+                "8:00 \u2013 9:00"
+            ],
+            [
+                "CD19342 - DPP",
+                "A202",
+                "Design Processes & Perspectives",
+                "2",
+                "9:00 \u2013 9:50"
+            ],
+            [
+                "BREAK",
+                "9:50 \u2013 10:10"
+            ],
+            [
+                "CS19342 - OOPS",
+                "A202",
+                "Object Oriented Programming Paradigm",
+                "3",
+                "10:10 \u2013 11:00"
+            ],
+            [
+                "LUNCH",
+                "4",
+                "11:00 \u2013 11:50"
+            ],
+            [
+                "CS19342 OOPS LAB / /CB19343 SE LAB",
+                "TLFL5/TLFL4",
+                "LAB",
+                "5/L",
+                "11:50 \u2013 12:30/12.40"
+            ],
+            [
+                "CS19342 OOPS LAB / /CB19343 SE LAB",
+                "TLFL5/TLFL4",
+                "LAB",
+                "L/5",
+                "12:30/12.40 \u2013 1:20"
+            ],
+            [
+                "MA19154 - DM",
+                "A310",
+                "Discrete Mathematics",
+                "6",
+                "1:20 \u2013 2:10"
+            ],
+            [
+                "CB19343 - SE",
+                "A310",
+                "Software Engineering",
+                "7",
+                "2:10 \u2013 3:00"
+            ]
+        ],
+        "FRIDAY": [
+            [
+                "MA19154 - DM",
+                "A309",
+                "Discrete Mathematics",
+                "1",
+                "8:00 \u2013 9:00"
+            ],
+            [
+                "MA19154 - DM",
+                "A309",
+                "Discrete Mathematics",
+                "2",
+                "9:00 \u2013 9:50"
+            ],
+            [
+                "BREAK",
+                "9:50 \u2013 10:10"
+            ],
+            [
+                "CS19342 - OOPS",
+                "A309",
+                "Object Oriented Programming Paradigm",
+                "3",
+                "10:10 \u2013 11:00"
+            ],
+            [
+                "CS19342 - OOPS",
+                "A309",
+                "Object Oriented Programming Paradigm",
+                "4",
+                "11:00 \u2013 11:50"
+            ],
+            [
+                "CB19343 - SE",
+                "A309",
+                "Software Engineering",
+                "5/L",
+                "11:50 \u2013 12:30/12.40"
+            ],
+            [
+                "LUNCH",
+                "L/5",
+                "12:30/12.40 \u2013 1:20"
+            ],
+            [
+                "CD19301 - CD",
+                "A309",
+                "Computer Design",
+                "6",
+                "1:20 \u2013 2:10"
+            ],
+            [
+                "COUN",
+                "A309",
+                "Counselling Hour",
+                "7",
+                "2:10 \u2013 3:00"
+            ]
+        ],
+        "SATURDAY": [
+            [
+                "CS19342 - OOPP",
+                "A202",
+                "Object Oriented Programming Paradigm",
+                "1",
+                "8:00 \u2013 9:00"
+            ],
+            [
+                "GE3252 - TT",
+                "A202",
+                "NA",
+                "2",
+                "9:00 \u2013 9:50"
+            ],
+            [
+                "BREAK",
+                "9:50 \u2013 10:10"
+            ],
+            [
+                "MA19154 - DM",
+                "A202",
+                "Discrete Mathematics",
+                "3",
+                "10:10 \u2013 11:00"
+            ],
+            [
+                "LUNCH",
+                "4",
+                "11:00 \u2013 11:50"
+            ],
+            [
+                "CS19342 OOPS LAB/  /CD19342 DPP LAB",
+                "TLFL5/JL1",
+                "LAB",
+                "5/L",
+                "11:50 \u2013 12:30/12.40"
+            ],
+            [
+                "CS19342 OOPS LAB/  /CD19342 DPP LAB",
+                "TLFL5/JL1",
+                "LAB",
+                "L/5",
+                "12:30/12.40 \u2013 1:20"
+            ],
+            [
+                "GE19301 - LSE",
+                "A202",
+                "Life Science for Engineers",
+                "6",
+                "1:20 \u2013 2:10"
+            ],
+            [
+                "GE19301 - LSE",
+                "A202",
+                "Life Science for Engineers",
+                "7",
+                "2:10 \u2013 3:00"
+            ]
+        ]
+    }
+}
