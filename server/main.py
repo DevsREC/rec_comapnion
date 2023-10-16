@@ -21,16 +21,18 @@ JOSN_PATH = os.path.join(os.getcwd(), 'timetable_upload/json')
 # make file upload - Done
 # read from excel file - Done
 
-@app.route('/upload', methods = ['GET'])
+
+@app.route('/upload', methods=['GET'])
 def index():
     return render_template('upload.html')
+
 
 @app.route('/upload', methods=['POST'])
 def upload_files():
     if 'file' not in request.files:
         flash('No file part')
         return redirect('upload')
- 
+
     file = request.files['file']
     # obtaining the name of the destination file
     filename = file.filename
@@ -38,7 +40,7 @@ def upload_files():
         flash('No file selected for uploading')
         return redirect('upload')
     else:
-        file_ext = os.path.splitext(filename)[1]        #Extracting extension
+        file_ext = os.path.splitext(filename)[1]  # Extracting extension
         if file_ext in allowed_extensions:
             secure_fname = secure_filename(filename)
             file_path = os.path.join(UPLOAD_PATH, secure_fname)
@@ -49,7 +51,7 @@ def upload_files():
         else:
             flash('Not allowed file type')
             return redirect('upload')
- 
+
 
 def create_tt(class_name):
     # add a way to check if the response cnotains all the expected parameters
@@ -62,7 +64,7 @@ def create_tt(class_name):
     except:
         res = {'Not Found': 'Upload it'}
     data = res
-    
+
     data = jsonify(data)
     return data
 
