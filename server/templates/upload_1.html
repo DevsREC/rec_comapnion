@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Timetable</title>
+</head>
+<body>
+    <div class="check-existence">
+        <form action="/check_existence" method="get">
+            <p>Enter: year-department-section (sec - A if only one section available)</p>
+            <p><em>Ex: 2-cse-e</em></p>
+            <input type="text" name="class_name" placeholder="enter class name" required>
+            <button type="submit">Check</button>
+        </form>
+
+        <p>
+            {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                <ul class=flashes>
+                {% for message in messages %}
+                  <li>{{ message }}</li>
+                {% endfor %}
+                </ul>
+              {% endif %}
+            {% endwith %}
+        </p>
+    </div>
+</body>
+</html>

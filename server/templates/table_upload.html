@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=\, initial-scale=1.0">
+    <title>Timetable Upload</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+        }
+
+        input{
+            width: 200px;
+            padding: 5px;
+            height: 40px;
+            margin: 5px auto;
+            border: 1px solid black;
+            border-radius: 5px;
+            font-weight: 600;
+        }
+
+        input::placeholder{
+            color: rgb(0, 0, 0);
+            font-weight: 700;
+        }
+
+        input:focus{
+            border: 1px solid rgb(100, 241, 100);
+            background-color: rgb(158, 246, 158);
+
+        }
+
+        button{
+            background-color: rgb(103, 238, 103);
+            border: 2px solid transparent;
+            border-radius: 25px;
+            color: black;
+            font-weight: bold;
+            width: 100px;
+            height: 48px;
+            transition: 0.3s;
+            display: block;
+            margin: 10px auto;
+        }
+
+        button:hover{
+            background-color: rgb(68, 164, 68);
+            border-color: black;
+            cursor: pointer;
+        }
+
+        .class_name{
+            border: 5px dotted rgb(243, 73, 118);
+            border-radius: 5px;
+        }
+
+        .dummy{
+            margin: 10px auto;
+            width: 95%;
+        }
+    </style>
+</head>
+<body>
+    <form action="/uploadtimetable" method="POST">
+        <div class="class_name">
+            <h3>Enter: department_year_section (sec - A if only one section available)</h3>
+            <h4><em>Ex: cse_2_e</em></h4>
+            <input type="text" name="class_name" placeholder="Enter class_name">
+        </div>
+        <h1>Timetable</h1>
+        {% for i in ['0', '1', '2', '3', '4'] %}
+            <div class="dummy">
+                <input type="text" placeholder="Day name" name={{ 'day_' + i }} required>
+                <input type="text" placeholder="Period 1" name={{ 'period_' + i + '1' }} required>
+                <input type="text" placeholder="Period 2" name={{ 'period_' + i + '2' }} required>
+                <input type="text" placeholder="Period 3" name={{ 'period_' + i + '3' }} required>
+                <input type="text" placeholder="Period 4" name={{ 'period_' + i + '4' }} required>
+                <input type="text" placeholder="Period 5" name={{ 'period_' + i + '5' }} required>
+                <input type="text" placeholder="Period 6" name={{ 'period_' + i + '6' }} required>
+                <input type="text" placeholder="Period 7" name={{ 'period_' + i + '7' }} required>
+                <input type="text" placeholder="Period 8" name={{ 'period_' + i + '8' }} required>
+                <input type="text" placeholder="Period 9" name={{ 'period_' + i + '9' }} required>
+            </div>
+            <br>
+        {% endfor %}
+        <button>Submit</button>
+    </form>
+</body>
+</html>
