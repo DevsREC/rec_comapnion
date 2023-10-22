@@ -19,12 +19,9 @@ def upload_timetable(data):
         connection.commit()
             
     return True     # Insertion Success
-    # except:
-    #     return False        #Insertion failed
 
 def add_new_class(class_name):
     time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    class_name = class_name.split('_')[1] + '-' + class_name.split('_')[0] + '-' + class_name.split('_')[-1]
     queryfinal = f'insert into classUpdated values("{class_name}", "{time}")'
     print(queryfinal)
     cursor.execute(queryfinal)
@@ -109,11 +106,5 @@ try:
                 user='root'
     )
     cursor = connection.cursor()
-        # cursor.execute(q)
-        # connection.commit()
-        # print("Executed")
-        # cursor.sa
-    # cursor.close()
-    # connection.close()
 except:
     print("Something went wrong with db")

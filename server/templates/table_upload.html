@@ -70,6 +70,19 @@
             <h3>Enter: department_year_section (sec - A if only one section available)</h3>
             <h4><em>Ex: cse_2_e</em></h4>
             <input type="text" name="class_name" placeholder="Enter class_name">
+            <div class="note">
+                <p>Namng Conventions:</p>
+                <p>Enter each time table in following way: <i>subject code 1-subject code 2/venue 1-venue 2/Time</i></p>
+                <p>Metion break or lunch as follows: BREAK/TIME and LUNCH/TIME</p>
+                <p>Seperate two subjects and venue using '-'</p>
+                <p>For labs mention it as 'lab' after subject code</p>
+                <p>
+                    <b>Ex:</b>
+                    <br>
+                    <h3>EC19341 LAB-CS19342 LAB/MPMC LAB 1-TLFL2/9:00-9:50</h3>
+                    <h3>CS19341/B411/1:20-2:10</h3>
+                </p>
+            </div>
         </div>
         <h1>Timetable</h1>
         {% for i in ['0', '1', '2', '3', '4'] %}
