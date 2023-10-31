@@ -1,5 +1,6 @@
 import pandas as pd
 import json
+import logging
 
 def remove_empty_space(l):
     nl = []
@@ -45,9 +46,7 @@ def read_xls(file_path, write_path):
     }
 
     fina_res = {
-        'CLASS_NAME': {
-            
-        },
+        'CLASS_NAME': [],
         'PERIODS': {
             
         }
@@ -68,7 +67,8 @@ def read_xls(file_path, write_path):
             number = roman_to_no(class_year.split(' ')[0])
             class_year.replace(class_year.split(' ')[0], number)
             class_year = number +'-' + '-'.join(class_year.split(' ')[1:])
-            fina_res['CLASS_NAME'] = class_year
+            logging.info(class_year)
+            fina_res['CLASS_NAME'].append(class_year)
             class_find = True
             
         new_dict = {}
@@ -149,6 +149,6 @@ def read_xls(file_path, write_path):
                 my_dict[i].append(current_period)
             fina_res['PERIODS'].update(my_dict)
             
-    wirte_file_path = write_path + '/' + fina_res['CLASS_NAME'] + '.json' 
+    wirte_file_path = write_path + '/' + fina_res['CLASS_NAME'][-1] + '.json' 
     with open(wirte_file_path, 'w', encoding='UTF-8') as f:
         json.dump(fina_res, f, indent= 4)
