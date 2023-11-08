@@ -1,0 +1,77 @@
+version: "3.8"
+
+# services ports are for debugging
+# while publishing disable them
+# use docker netowrking to connect with other services
+# <service_name> will connect with docker services that is running. automatic DNS
+#
+services:
+  # time_table:
+  #   build: ./1_time_table
+  #   links:
+  #     - db
+  #   ports:
+  #     - "5000:5000"
+  #   volumes:
+  #     - ./server/:/app
+  #
+
+  get-info:
+    build: ./0_get_info
+    links:
+      - db
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./0_get_info/:/app
+
+  internal-marks:
+    build: ./2_internal_marks
+    links:
+      - db
+    ports:
+      - "5001:5000"
+    volumes:
+      - ./2_internal_marks/:/app
+
+  sem-marks:
+    build: ./3_sem_grades
+    links:
+      - db
+    ports:
+      - "5002:5000"
+    volumes:
+      - ./3_sem_grades:/app
+
+  get-sems:
+    build: ./3.5_get_sems
+    links:
+      - db
+    ports:
+      - "5003:5000"
+    volumes:
+      - ./3.5_get_sems/:/app
+
+  db:
+    image: mysql:8.0
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d/:ro
+      - ./db:/var/lib/mysql
+
+  nginx:
+    image: nginx:1.25
+    depends_on:
+      # - "time_table"
+      - "db"
+      - "internal-marks"
+      - "sem-marks"
+      - "get-info"
+      - "get-sems"
+    volumes:
+      - ./nginx/:/etc/nginx/
+    ports:
+      - "8080:80"
