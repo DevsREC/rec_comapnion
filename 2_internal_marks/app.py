@@ -65,11 +65,60 @@ def marks(rollno):
         json=json_data,
         verify=False,
     )
+    data = json.loads(response.json()['d'])
+    """
+    example data:
+    {
+        #sem
+        1:[
+        cat 1,{}
+        cat 2,{}
+        cat 3,{}
+        ]
+        2:[...]
+    }
+    """
+    mod_data = {}
+    for test in data:
+        """
+            'CATEST1'
+            'CATEST3(IIYEAR-FN)'
+            'ASSIGNMENTI'
+            unified backend was written by a bunch of monkeys while they were drunk and on meth.
+            the fact that it works at all is a big achievement.
+            In my opinion the servers that the code runs on should be cleansed with fire and whoever was in charge of
+            desiging the api should just give up software development and move onto something better like becoming a farmer
+            even then i don't think they can manage that.
 
-    data = response.json()
-    data = json.loads(data['d'])
+            fuck it I am gonna just check if 'TEST' is in the string. or ASSIGNMENT
+            and a cat number(1,2,3)
+        """
+        title = test['EventTitle']
+        test_sem = int(test['Semester'])
 
-    return data
+        cat = title.split("/")[2]
+        cat = cat.strip(" ").replace(" ", "")
+        cat = cat.upper()
+        cat_no = 0
+        if 'CA' in cat:
+            if '1' in cat:
+                cat_no = 0
+            if '2' in cat:
+                cat_no = 1
+            if '3' in cat:
+                cat_no = 2
+
+        if test_sem in mod_data.keys():
+            mod_data[test_sem][cat_no].append(test)
+        else:
+            mod_data[test_sem] = [
+                [],  # cat 1
+                [],  # cat 2
+                [],  # cat 3
+            ]
+            mod_data[test_sem][cat_no].append(test)
+
+    return mod_data
 
 
 if __name__ == "__main__":

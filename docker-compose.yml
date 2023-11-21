@@ -52,6 +52,15 @@ services:
     volumes:
       - ./3.5_get_sems/:/app
 
+  get-attendance:
+    build: ./4_attendance-selected
+    links:
+      - db
+    ports:
+      - "5004:5000"
+    volumes:
+      - ./4_attendance-selected:/app
+
   db:
     image: mysql:8.0
     ports:
