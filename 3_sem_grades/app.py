@@ -1,9 +1,11 @@
 from flask import Flask
+from flask_cors import CORS
 import requests
 import mysql.connector
 import json
 
 app = Flask(__name__)
+cors = CORS(app)
 app.secret_key = "secret"
 
 
@@ -80,8 +82,20 @@ def marks(rollno, sem=0):
     )
     data = response.json()
     data = json.loads(data['d'])
+    """
+    data modal: is gonna be easy for this unlinke internalmarks
+    just an array of dict
+    with each sem having their own dict array
+    """
+    mod_data = {}
+    for sem in data:
+        if sem['Semester'] in mod_data.keys():
+            mod_data[sem['Semester']].append(sem)
+        else:
+            mod_data[sem['Semester']] = []
+            mod_data[sem['Semester']].append(sem)
 
-    return data
+    return mod_data
 
 
 if __name__ == "__main__":

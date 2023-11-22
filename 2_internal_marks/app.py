@@ -1,9 +1,11 @@
 from flask import Flask
+from flask_cors import CORS
 import requests
 import mysql.connector
 import json
 
 app = Flask(__name__)
+cors = CORS(app)
 app.secret_key = "secret"
 
 
@@ -82,6 +84,8 @@ def marks(rollno):
     for test in data:
         """
             'CATEST1'
+            'CAT TEST1'
+            'CAT TEST 1'
             'CATEST3(IIYEAR-FN)'
             'ASSIGNMENTI'
             unified backend was written by a bunch of monkeys while they were drunk and on meth.
@@ -92,15 +96,35 @@ def marks(rollno):
 
             fuck it I am gonna just check if 'TEST' is in the string. or ASSIGNMENT
             and a cat number(1,2,3)
+
+            CourseName	"B.Tech-IT"
+            EventTitle	"2022-23/ODD/CA TEST 1 / II Year/Regular/UG"
+            FirstName	"********"
+            PersonId	*****
+            SectionName	"A"
+            Semester	"3"
+            SubjName	"Software Engineering Essentials"
+            Total	null
+            U1	0
+            U2	0
+            U3	0
+            U4	0
+            U5  0
+
+            sometimes they just like to return a fucking null.
+
+
         """
         title = test['EventTitle']
         test_sem = int(test['Semester'])
+        total = test['Total']
 
         cat = title.split("/")[2]
         cat = cat.strip(" ").replace(" ", "")
         cat = cat.upper()
+
         cat_no = 0
-        if 'CA' in cat:
+        if 'CATEST' in cat:
             if '1' in cat:
                 cat_no = 0
             if '2' in cat:
@@ -108,15 +132,17 @@ def marks(rollno):
             if '3' in cat:
                 cat_no = 2
 
-        if test_sem in mod_data.keys():
-            mod_data[test_sem][cat_no].append(test)
-        else:
-            mod_data[test_sem] = [
-                [],  # cat 1
-                [],  # cat 2
-                [],  # cat 3
-            ]
-            mod_data[test_sem][cat_no].append(test)
+            if test_sem in mod_data.keys():
+                if total:
+                    mod_data[test_sem][cat_no].append(test)
+            else:
+                mod_data[test_sem] = [
+                    [],  # cat 1
+                    [],  # cat 2
+                    [],  # cat 3
+                ]
+                if total:
+                    mod_data[test_sem][cat_no].append(test)
 
     return mod_data
 
