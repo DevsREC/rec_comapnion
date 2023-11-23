@@ -24,6 +24,8 @@ services:
       - "5000:5000"
     volumes:
       - ./0_get_info/:/app
+    networks:
+      - private
 
   internal-marks:
     build: ./2_internal_marks
@@ -33,6 +35,8 @@ services:
       - "5001:5000"
     volumes:
       - ./2_internal_marks/:/app
+    networks:
+      - private
 
   sem-marks:
     build: ./3_sem_grades
@@ -42,6 +46,8 @@ services:
       - "5002:5000"
     volumes:
       - ./3_sem_grades:/app
+    networks:
+      - private
 
   get-sems:
     build: ./3.5_get_sems
@@ -51,6 +57,8 @@ services:
       - "5003:5000"
     volumes:
       - ./3.5_get_sems/:/app
+    networks:
+      - private
 
   get-attendance:
     build: ./4_attendance-selected
@@ -60,6 +68,8 @@ services:
       - "5004:5000"
     volumes:
       - ./4_attendance-selected:/app
+    networks:
+      - private
 
   db:
     image: mysql:8.0
@@ -70,6 +80,23 @@ services:
     volumes:
       - ./db:/docker-entrypoint-initdb.d/:ro
       - ./db:/var/lib/mysql
+    networks:
+      - private
+
+  client:
+    build: ./client
+    depends_on:
+      - "db"
+      - "internal-marks"
+      - "sem-marks"
+      - "get-info"
+      - "get-sems"
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./client/:/app
+    networks:
+      - public
 
   nginx:
     image: nginx:1.25
@@ -84,3 +111,10 @@ services:
       - ./nginx/:/etc/nginx/
     ports:
       - "8080:80"
+    networks:
+      - private
+      - public
+
+networks:
+  public:
+  private:
