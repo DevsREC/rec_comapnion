@@ -49,8 +49,8 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <NextUIProvider className="h-full w-full dark text-foreground bg-background">
-      <main className="dark text-foreground bg-background w-full h-full">
+    <NextUIProvider className="h-full w-full text-foreground bg-background">
+      <main className="light text-foreground bg-background w-full h-full">
         <RouterProvider router={router} />
       </main>
     </NextUIProvider>

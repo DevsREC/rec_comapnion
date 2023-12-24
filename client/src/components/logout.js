@@ -9,7 +9,7 @@ function Logout() {
     navigate("/login");
   }
   return (
-    <Button onClick={logout} color="primary">
+    <Button color="secondary" onClick={logout}>
       LogOut
     </Button>
   );

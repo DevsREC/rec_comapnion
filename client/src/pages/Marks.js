@@ -37,12 +37,12 @@ function Marks() {
       const url = `/api/internal-marks/${rollno}`;
       axios
         .get(url, {})
-        .then(function(response) {
+        .then(function (response) {
           // console.log(response.data);
           // console.log(data[1][0]);
           setData(response.data);
         })
-        .catch(function(error) {
+        .catch(function (error) {
           console.log("shit good luck; i ain't fixing that", error);
         })
         .finally(() => {
@@ -108,7 +108,7 @@ function Marks() {
   // console.log(data[1][0]);
   //
   return (
-    <div className="dark bg-background text-foreground">
+    <div className="bg-background text-foreground">
       <Table
         radius="none"
         shadow="none"
@@ -118,7 +118,9 @@ function Marks() {
             <h1>Semester</h1>
             <Pagination
               showControls
+              color="secondary"
               total={no_sems}
+              color="secondary"
               initialPage={no_sems}
               page={sempage}
               onChange={(page) => setSempage(page)}
@@ -126,6 +128,7 @@ function Marks() {
             <h1>CAT</h1>
             <Pagination
               showControls
+              color="secondary"
               total={3}
               initialPage={1}
               page={catpage + 1}
