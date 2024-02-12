@@ -51,6 +51,22 @@ function Home() {
   };
   useEffect(getData, [rollno]);
 
+  const [pic, setPic] = useState({});
+  const getPic = () => {
+    const url = "/api/get-info/get-photo/" + rollno;
+    axios
+      .get(url, {})
+      .then(function(response) {
+        // console.log(response);
+        setPic(response.data);
+      })
+      .catch(function(error) {
+        console.log(error);
+      })
+      .finally(function() { });
+  };
+  useEffect(getPic, [rollno]);
+
   return (
     <div className="center">
       {/* <Login /> */}
@@ -59,7 +75,7 @@ function Home() {
         loading="lazy"
         width={300}
         alt="USER"
-        src={data.image}
+        src={pic.image}
         fallbackSrc="https://via.placeholder.com/300x300"
       />
       <Table radius="none" shadow="none" isStriped>
