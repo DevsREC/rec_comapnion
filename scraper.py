@@ -41,6 +41,7 @@ def create_user_table():
     UNIFIED_ID INT(30) NOT NULL,
     ROLLNO INT(30) NOT NULL,
     NAME VARCHAR(200),
+    EMAIL VARCHAR(200),
     PRIMARY KEY (ID)
     );
     """
@@ -83,13 +84,13 @@ mydb = mysql.connector.connect(
 mycursor = mydb.cursor()
 
 
-def add_user(unified_id, rollno, name):
+def add_user(unified_id, rollno, name, email):
 
-    print(f"ADDING USER {rollno} {unified_id} {name}")
+    print(f"ADDING USER {rollno} {unified_id} {name} {email}")
     add_user_query = """
-    INSERT INTO users (UNIFIED_ID, ROLLNO, NAME) values (%s, %s,%s)
+    INSERT INTO users (UNIFIED_ID, ROLLNO, NAME, EMAIL) values (%s,%s,%s,%s)
     """
-    user_data = (unified_id, rollno, name)
+    user_data = (unified_id, rollno, name, email)
     try:
         mycursor.execute(add_user_query, user_data)
         print(f'ADDED: {user_data}')
@@ -99,7 +100,7 @@ def add_user(unified_id, rollno, name):
 
 def make_request(payload):
     person_id = payload['PersonID']
-    timeout = 10
+    timeout = 60
     URL = 'http://rajalakshmi.in/UI/Modules/Profile/Profile.aspx/GetPersonInfo'
     try:
         response = requests.post(
@@ -123,13 +124,13 @@ def minigun():
 
     list_of_users = []
     payloads = []
-    for i in range(0, 100000):
+    for i in range(50000, 60000):
         payloads.append(
             {
                 'PersonID': i
             }
         )
-    with concurrent.futures.ThreadPoolExecutor(max_workers=120) as executor:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=80) as executor:
         futures = {
             executor.submit(make_request, payload):
             payload for payload in payloads
@@ -167,6 +168,10 @@ def minigun():
             rollnumber = details[0]['RollNumber']
         except KeyError:
             rollnumber = 0
+        try:
+            email = details[0]['CollegeEmail']
+        except KeyError:
+            email = ""
         # Name
         try:
             name = details[0]['Name'].strip('\t').replace(
@@ -174,7 +179,7 @@ def minigun():
         except Exception as e:
             print("Exception raised!", e)
             name = ""
-        add_user(person_id, rollnumber, name)
+        add_user(person_id, rollnumber, name, email)
 
         if count % 100 == 0:
             mydb.commit()
@@ -189,5 +194,4 @@ if __name__ == "__main__":
     # create_database()
     # delete_user_table()
     # create_user_table()
-
     minigun()
