@@ -1,0 +1,7 @@
+@app.route('/get-info/photo/<int:rollno>')
+@app.route('/get-info/<int:rollno>')
+@app.route('/internal-marks/<int:rollno>')
+@app.route('/get-sems/<int:rollno>')
+@app.route('/sem-marks/<int:rollno>/')
+@app.route('/sem-marks/<int:rollno>/<int:sem>')
+@app.route('/get-attendacne/<int:rollno>/')

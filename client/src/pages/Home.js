@@ -53,7 +53,7 @@ function Home() {
 
   const [pic, setPic] = useState({});
   const getPic = () => {
-    const url = "/api/get-info/get-photo/" + rollno;
+    const url = "/api/get-photo/" + rollno;
     axios
       .get(url, {})
       .then(function(response) {

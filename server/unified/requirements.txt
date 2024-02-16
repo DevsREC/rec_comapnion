@@ -1,0 +1,9 @@
+Flask
+requests
+pymongo
+mysql-connector-python
+flask-cors
+Flask-JWT-Extended
+google-auth
+google-auth-oauthlib
+

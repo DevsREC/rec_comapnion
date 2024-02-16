@@ -5,59 +5,17 @@ version: "3.8"
 # use docker netowrking to connect with other services
 # <service_name> will connect with docker services that is running. automatic DNS
 #
+# server, db  should be on private network
+# client should be on the public network
+# nginx will be the middleman connecting both the networks
 services:
-  # time_table:
-  #   build: ./1_time_table
-  #   links:
-  #     - db
-  #   ports:
-  #     - "5000:5000"
-  #   volumes:
-  #     - ./server/:/app
-  #
 
-  get-info:
-    build: ./0_get_info
+  server:
+    build: ./server/unified/
     ports:
       - "5000:5000"
     volumes:
-      - ./0_get_info/:/app
-    networks:
-      - private
-
-  internal-marks:
-    build: ./2_internal_marks
-    ports:
-      - "5001:5000"
-    volumes:
-      - ./2_internal_marks/:/app
-    networks:
-      - private
-
-  sem-marks:
-    build: ./3_sem_grades
-    ports:
-      - "5002:5000"
-    volumes:
-      - ./3_sem_grades:/app
-    networks:
-      - private
-
-  get-sems:
-    build: ./3.5_get_sems
-    ports:
-      - "5003:5000"
-    volumes:
-      - ./3.5_get_sems/:/app
-    networks:
-      - private
-
-  get-attendance:
-    build: ./4_attendance-selected
-    ports:
-      - "5004:5000"
-    volumes:
-      - ./4_attendance-selected:/app
+      - ./server/unified/:/app
     networks:
       - private
 
@@ -74,12 +32,10 @@ services:
 
   client:
     build: ./client
-    depends_on:
-      - "db"
-      - "internal-marks"
-      - "sem-marks"
-      - "get-info"
-      - "get-sems"
+    # client need to depend on db or server since it doesn't need them to function during building process
+    # depends_on:
+    #   - "db"
+    #   - "server"
     ports:
       - "3000:3000"
     volumes:
@@ -90,11 +46,7 @@ services:
   nginx:
     image: nginx:1.25
     depends_on:
-      - "db"
-      - "internal-marks"
-      - "sem-marks"
-      - "get-info"
-      - "get-sems"
+      - "server"
     volumes:
       - ./nginx/:/etc/nginx/
     ports:
