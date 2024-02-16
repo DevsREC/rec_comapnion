@@ -1,16 +1,48 @@
-from flask import Flask
-from flask import url_for
+from flask import Flask, request
 from flask_cors import CORS
+
+from functools import wraps
+import jwt
+
 import requests
 import mysql.connector
 import json
 
+from google.oauth2 import id_token
+# renamed to fix same name as requests lib 
+from google.auth.transport import requests as google_req
+CLIENT_ID = '1096735290601-r734om3lj6l65al5f8gdnbrag3m3cieu.apps.googleusercontent.com'
+
 app = Flask(__name__)
 cors = CORS(app)
 app.secret_key = "secret"
+app.config["JWT_SECRET_KEY"] = CLIENT_ID
+app.config["JWT_TOKEN_LOCATION"] = 'headers'
+app.config['JWT_HEADER_NAME'] = 'Authorization'
+app.config['JWT_HEADER_TYPE'] = 'Bearer'
 
+def login_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        print(request.headers)
+        if request.headers['Authorization']:
+            token = request.headers.get('Authorization')
+            token = token.split()[1]
+            idinfo = id_token.verify_oauth2_token(token, google_req.Request(), CLIENT_ID)
+            print("FUCK", idinfo)
+            if idinfo['sub']:
+                print("success-means-this-works")
+                return f(*args, **kwargs), 200
+        return "Try Loging in..", 403
+    return decorated_function
 
-def get_id(rollno):
+# todo change to email
+def get_id(header):
+
+    token = header.get('Authorization')
+    token = token.split()[1]
+    decoded = jwt.decode(token, options={"verify_signature": False})
+    email = decoded['email']
 
     mydb = mysql.connector.connect(
         host="db",
@@ -21,8 +53,8 @@ def get_id(rollno):
     )
 
     mycursor = mydb.cursor()
-    get_user_query = "SELECT UNIFIED_ID from users where ROLLNO=%s"
-    user_data = (rollno,)
+    get_user_query = "SELECT UNIFIED_ID from users where EMAIL=%s"
+    user_data = (email,)
     mycursor.execute(get_user_query, user_data)
     person_id = mycursor.fetchone()
     if person_id:
@@ -36,9 +68,13 @@ def get_id(rollno):
 
 
 
-@app.route('/get-photo/<int:rollno>')
-def get_photo(rollno):
-    person_id = get_id(rollno)
+@app.route('/get-photo/')
+@login_required
+def get_photo():
+    # person_id = get_id(rollno)
+
+    # debug
+    person_id = get_id(request.headers)
 
     cookies = {
         'G_ENABLED_IDPS': 'google',
@@ -73,10 +109,9 @@ def get_photo(rollno):
     return data
 
 
-@app.route('/get-info/<int:rollno>')
-def get_info(rollno):
-    person_id = get_id(rollno)
-
+@app.route('/get-info/')
+def get_info():
+    person_id = get_id(request.headers)
     cookies = {
         'G_ENABLED_IDPS': 'google',
         'ASP.NET_SessionId': '000000000000000000000000',
@@ -138,9 +173,10 @@ def get_info(rollno):
     data.update(header)
     return data
 
-@app.route('/internal-marks/<int:rollno>')
-def internal_marks(rollno):
-    person_id = get_id(rollno)
+@app.route('/internal-marks/')
+@login_required
+def internal_marks():
+    person_id = get_id(request.headers)
     cookies = {
         'G_ENABLED_IDPS': 'google',
         'ASP.NET_SessionId': '000000000000000000000000',
@@ -251,14 +287,15 @@ def internal_marks(rollno):
     return mod_data
 
 
-@app.route('/get-sems/<int:rollno>')
-def get_sems(rollno):
+@app.route('/get-sems/')
+@login_required
+def get_sems():
     """
     app route: http://localhost/<rollno>/<sem>
     default sem: 0 -> gives the possible semesters
     returns numbers of semesters
     """
-    person_id = get_id(rollno)
+    person_id = get_id(request.headers)
 
     cookies = {
         'G_ENABLED_IDPS': 'google',
@@ -296,9 +333,10 @@ def get_sems(rollno):
     return data
 
 
-@app.route('/sem-marks/<int:rollno>/')
-@app.route('/sem-marks/<int:rollno>/<int:sem>')
-def semester_marks(rollno, sem=0):
+@app.route('/sem-marks/')
+@app.route('/sem-marks/<int:sem>')
+@login_required
+def semester_marks(sem=0):
     """
     app route: https://loalhost/<rollno>/<sem>
     <roll_no> user roll number is provided them their unified id is retrived from database
@@ -310,7 +348,7 @@ def semester_marks(rollno, sem=0):
         .
 
     """
-    person_id = get_id(rollno)
+    person_id = get_id(request.headers)
     cookies = {
         'G_ENABLED_IDPS': 'google',
         'ASP.NET_SessionId': '000000000000000000000000',
@@ -359,9 +397,10 @@ def semester_marks(rollno, sem=0):
 
 
 # TODO
-@app.route('/get-attendacne/<int:rollno>/')
+@app.route('/get-attendacne')
+@login_required
 def get_attendance(rollno):
-    person_id = get_id(rollno)
+    person_id = get_id(request.headers)
 
     cookies = {
         'G_ENABLED_IDPS': 'google',

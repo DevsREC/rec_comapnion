@@ -22,35 +22,37 @@ import { Audio } from "react-loader-spinner";
 
 function Grade() {
   // auth
-  const [rollno, setRollno] = useState("");
+  const [token, setToken] = useState("");
   const [sempage, setSempage] = useState(1);
   const navigate = useNavigate();
   const [data, setData] = useState({});
   useEffect(() => {
-    if (localStorage.getItem("rollno") === null) {
-      console.log("no roll number");
+    if (localStorage.getItem("JWT_TOKEN") === null) {
+      console.log("NOT LOGGED IN");
       navigate("/login");
     } else {
-      setRollno(localStorage.getItem("rollno"));
+      setToken(localStorage.getItem("JWT_TOKEN"));
+      console.log("token set", token)
     }
-    if (rollno) {
-      const url = `/api/sem-marks/${rollno}/`;
+  }, []);
+
+  const getData = () => {
+    if (token !== '') {
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}` 
+      const url = `/api/sem-marks/`;
       axios
         .get(url, {})
         .then(function(response) {
-          // console.log(response.data);
-          // console.log(data[1][0]);
           setData(response.data);
           console.log("grade:", data);
         })
         .catch(function(error) {
           console.log(error);
-        })
-        .finally(() => {
-          // console.log(data[1][0]);
         });
     }
-  }, [rollno, navigate]);
+
+  };
+  useEffect(getData, [token]);
 
   // debug
   // console.log(data);

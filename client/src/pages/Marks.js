@@ -21,25 +21,45 @@ import { Audio } from "react-loader-spinner";
 
 function Marks() {
   // auth
-  const [rollno, setRollno] = useState("");
+  const [token, setToken] = useState("");
   const [sempage, setSempage] = useState(1);
   const [catpage, setCatpage] = useState(0);
   const navigate = useNavigate();
   const [data, setData] = useState({});
+
   useEffect(() => {
-    if (localStorage.getItem("rollno") === null) {
-      console.log("no roll number");
+
+    if (localStorage.getItem("JWT_TOKEN") === null) {
+      console.log("NOT LOGGED IN");
       navigate("/login");
     } else {
-      setRollno(localStorage.getItem("rollno"));
+      setToken(localStorage.getItem("JWT_TOKEN"));
+      console.log("token set", token)
     }
-    if (rollno) {
-      const url = `/api/internal-marks/${rollno}`;
+    // if (rollno) {
+    //   const url = `/api/internal-marks/${rollno}`;
+    //   axios
+    //     .get(url, {})
+    //     .then(function (response) {
+    //       // console.log(response.data);
+    //       // console.log(data[1][0]);
+    //       setData(response.data);
+    //     })
+    //     .catch(function (error) {
+    //       console.log("shit good luck; i ain't fixing that", error);
+    //     })
+    //     .finally(() => {
+    //       // console.log(data[1][0]);
+    //     });
+    // }
+  }, []);
+  const getData = () => {
+    if (token !== "") {
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}` 
+      const url = `/api/internal-marks/`;
       axios
         .get(url, {})
         .then(function (response) {
-          // console.log(response.data);
-          // console.log(data[1][0]);
           setData(response.data);
         })
         .catch(function (error) {
@@ -49,7 +69,9 @@ function Marks() {
           // console.log(data[1][0]);
         });
     }
-  }, [rollno, navigate]);
+
+  }
+  useEffect(getData, [token]);
 
   // debug
   // console.log(data);
@@ -120,7 +142,6 @@ function Marks() {
               showControls
               color="secondary"
               total={no_sems}
-              color="secondary"
               initialPage={no_sems}
               page={sempage}
               onChange={(page) => setSempage(page)}

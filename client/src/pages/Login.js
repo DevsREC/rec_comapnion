@@ -9,12 +9,19 @@ import { jwtDecode } from "jwt-decode";
 function Login() {
   const navigate = useNavigate();
   const [rollno, setRollno] = useState("");
+  const [token, setToken] = useState("");
   // Initial load
   useEffect(() => {
-    if (localStorage.getItem("rollno") === null) {
-      console.log("no roll number");
+    // if (localStorage.getItem("rollno") === null) {
+    //   console.log("no roll number");
+    // } else {
+    //   setRollno(localStorage.getItem("rollno"));
+    //   navigate("/home");
+    // }
+    if (localStorage.getItem("JWT_TOKEN") === null) {
+      console.log("TRY LOGINING");
     } else {
-      setRollno(localStorage.getItem("rollno"));
+      setToken(localStorage.getItem("JWT_TOKEN"));
       navigate("/home");
     }
   }, [navigate]);
@@ -30,6 +37,9 @@ function Login() {
     let creds = jwtDecode(response.credential);
     setUser(creds);
     console.log("Credentials", creds);
+    console.log("jwt: ", response.credential);
+    localStorage.setItem("JWT_TOKEN", response.credential)
+    navigate("/home");
   }
     const errorMessage = (error) => {
         console.log(error);
@@ -38,16 +48,16 @@ function Login() {
   return (
     <div className="w-full h-full login">
             <GoogleLogin onSuccess={responseMessage} onError={errorMessage} />
-      <Input
-        className="center max-w-xs"
-        type="text"
-        label="RollNumber"
-        placeholder="211001084"
-        onChange={(e) => setRollno(e.target.value)}
-      />
-      <Button onClick={handlesubmit} className="center">
-        Submit
-      </Button>
+      {/* <Input */}
+      {/*   className="center max-w-xs" */}
+      {/*   type="text" */}
+      {/*   label="RollNumber" */}
+      {/*   placeholder="211001084" */}
+      {/*   onChange={(e) => setRollno(e.target.value)} */}
+      {/* /> */}
+      {/* <Button onClick={handlesubmit} className="center"> */}
+      {/*   Submit */}
+      {/* </Button> */}
     </div>
   );
 }

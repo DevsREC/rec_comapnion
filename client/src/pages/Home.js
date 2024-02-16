@@ -23,37 +23,53 @@ import Logout from "../components/logout";
 
 function Home() {
   // auth
-  const [rollno, setRollno] = useState("");
+  const [token, setToken] = useState("");
   const navigate = useNavigate();
+
   useEffect(() => {
-    if (localStorage.getItem("rollno") === null) {
-      console.log("no roll number");
+    // if (localStorage.getItem("rollno") === null) {
+    //   console.log("no roll number");
+    //   navigate("/login");
+    // } else {
+    //   setRollno(localStorage.getItem("rollno"));
+    if (localStorage.getItem("JWT_TOKEN") === null) {
+      console.log("NOT LOGGED IN");
       navigate("/login");
     } else {
-      setRollno(localStorage.getItem("rollno"));
+      setToken(localStorage.getItem("JWT_TOKEN"));
+      console.log("token set", token)
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}` 
     }
+
   }, []);
   // auth ends
 
   const [data, setData] = useState({});
   const getData = () => {
-    const url = "/api/get-info/" + rollno;
+
+    if( token !== ""){
+    axios.defaults.headers.common['Authorization'] = `Bearer ${token}` 
+    const url = "/api/get-info/";
     axios
       .get(url, {})
       .then(function(response) {
-        // console.log(response);
+          console.log(response.data)
         setData(response.data);
       })
       .catch(function(error) {
         console.log(error);
       })
       .finally(function() { });
+    }
   };
-  useEffect(getData, [rollno]);
+  useEffect(getData, [token]);
 
   const [pic, setPic] = useState({});
   const getPic = () => {
-    const url = "/api/get-photo/" + rollno;
+    if( token !== ""){
+
+    axios.defaults.headers.common['Authorization'] = `Bearer ${token}` 
+    const url = "/api/get-photo/";
     axios
       .get(url, {})
       .then(function(response) {
@@ -64,8 +80,9 @@ function Home() {
         console.log(error);
       })
       .finally(function() { });
+    }
   };
-  useEffect(getPic, [rollno]);
+  useEffect(getPic, [token]);
 
   return (
     <div className="center">
@@ -86,10 +103,9 @@ function Home() {
         <TableBody>
           <TableRow key="1">
             <TableCell>
-              {" "}
-              <h2>ROLLNUMBER</h2>{" "}
+              <h2>ROLLNUMBER</h2>
             </TableCell>
-            <TableCell>{rollno}</TableCell>
+            <TableCell>{data['RollNumber']}</TableCell>
           </TableRow>
           <TableRow>
             <TableCell>
