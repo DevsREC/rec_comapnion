@@ -29,9 +29,7 @@ def login_required(f):
             token = request.headers.get('Authorization')
             token = token.split()[1]
             idinfo = id_token.verify_oauth2_token(token, google_req.Request(), CLIENT_ID)
-            print("FUCK", idinfo)
             if idinfo['sub']:
-                print("success-means-this-works")
                 return f(*args, **kwargs), 200
         return "Try Loging in..", 403
     return decorated_function
@@ -110,6 +108,7 @@ def get_photo():
 
 
 @app.route('/get-info/')
+@login_required
 def get_info():
     person_id = get_id(request.headers)
     cookies = {

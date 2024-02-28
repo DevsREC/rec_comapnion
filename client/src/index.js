@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
+
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import reportWebVitals from "./reportWebVitals";
 import { NextUIProvider } from "@nextui-org/react";
@@ -51,8 +52,8 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
     <GoogleOAuthProvider clientId="1096735290601-r734om3lj6l65al5f8gdnbrag3m3cieu.apps.googleusercontent.com">
   <React.StrictMode>
-    <NextUIProvider className="h-full w-full text-foreground bg-background">
-      <main className="light text-foreground bg-background w-full h-full">
+    <NextUIProvider className="dark h-full w-full text-foreground bg-background">
+      <main className="dark text-foreground bg-background w-full h-full">
         <RouterProvider router={router} />
       </main>
     </NextUIProvider>

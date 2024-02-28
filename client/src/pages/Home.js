@@ -14,10 +14,10 @@ import {
 import { useNavigate } from "react-router-dom";
 
 import { Audio } from "react-loader-spinner";
+import Logout from "../components/Logout"
 
 import Marks from "./Marks";
 import Grade from "./Grade";
-import Logout from "../components/logout";
 
 //debug
 
@@ -27,17 +27,11 @@ function Home() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // if (localStorage.getItem("rollno") === null) {
-    //   console.log("no roll number");
-    //   navigate("/login");
-    // } else {
-    //   setRollno(localStorage.getItem("rollno"));
     if (localStorage.getItem("JWT_TOKEN") === null) {
       console.log("NOT LOGGED IN");
       navigate("/login");
     } else {
       setToken(localStorage.getItem("JWT_TOKEN"));
-      console.log("token set", token)
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}` 
     }
 
@@ -48,18 +42,26 @@ function Home() {
   const getData = () => {
 
     if( token !== ""){
-    axios.defaults.headers.common['Authorization'] = `Bearer ${token}` 
-    const url = "/api/get-info/";
-    axios
-      .get(url, {})
-      .then(function(response) {
-          console.log(response.data)
-        setData(response.data);
-      })
-      .catch(function(error) {
-        console.log(error);
-      })
-      .finally(function() { });
+      if(localStorage.getItem('info') === null){
+        axios.defaults.headers.common['Authorization'] = `Bearer ${token}` 
+        const url = "/api/get-info/";
+        axios
+          .get(url, {})
+          .then(function(response) {
+              console.log(response.data)
+            setData(response.data);
+            localStorage.setItem('info', JSON.stringify(response.data));
+          })
+          .catch(function(error) {
+            console.log(error);
+            localStorage.clear();
+            navigate("/login");
+          })
+          .finally(function() { });
+        }
+      else{
+        setData(JSON.parse(localStorage.getItem('info')));
+      }
     }
   };
   useEffect(getData, [token]);
@@ -67,27 +69,33 @@ function Home() {
   const [pic, setPic] = useState({});
   const getPic = () => {
     if( token !== ""){
-
-    axios.defaults.headers.common['Authorization'] = `Bearer ${token}` 
-    const url = "/api/get-photo/";
-    axios
-      .get(url, {})
-      .then(function(response) {
-        // console.log(response);
-        setPic(response.data);
-      })
-      .catch(function(error) {
-        console.log(error);
-      })
-      .finally(function() { });
+      if(localStorage.getItem('pic') === null){
+        axios.defaults.headers.common['Authorization'] = `Bearer ${token}` 
+        const url = "/api/get-photo/";
+        axios
+          .get(url, {})
+          .then(function(response) {
+            setPic(response.data);
+            localStorage.setItem('pic', JSON.stringify(response.data));
+          })
+          .catch(function(error) {
+            console.log(error);
+            localStorage.clear();
+            navigate("/login");
+          })
+          .finally(function() { });
+        }
+      else{
+        setPic(JSON.parse(localStorage.getItem('pic')));
+      }
     }
   };
   useEffect(getPic, [token]);
 
   return (
     <div className="center">
-      {/* <Login /> */}
       <Logout className="right" />
+      {/* <Login /> */}
       <Image
         loading="lazy"
         width={300}

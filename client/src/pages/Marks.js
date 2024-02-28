@@ -21,10 +21,10 @@ import { Audio } from "react-loader-spinner";
 
 function Marks() {
   // auth
+  const navigate = useNavigate();
   const [token, setToken] = useState("");
   const [sempage, setSempage] = useState(1);
   const [catpage, setCatpage] = useState(0);
-  const navigate = useNavigate();
   const [data, setData] = useState({});
 
   useEffect(() => {
@@ -34,40 +34,33 @@ function Marks() {
       navigate("/login");
     } else {
       setToken(localStorage.getItem("JWT_TOKEN"));
-      console.log("token set", token)
     }
-    // if (rollno) {
-    //   const url = `/api/internal-marks/${rollno}`;
-    //   axios
-    //     .get(url, {})
-    //     .then(function (response) {
-    //       // console.log(response.data);
-    //       // console.log(data[1][0]);
-    //       setData(response.data);
-    //     })
-    //     .catch(function (error) {
-    //       console.log("shit good luck; i ain't fixing that", error);
-    //     })
-    //     .finally(() => {
-    //       // console.log(data[1][0]);
-    //     });
-    // }
   }, []);
+
   const getData = () => {
     if (token !== "") {
-      axios.defaults.headers.common['Authorization'] = `Bearer ${token}` 
-      const url = `/api/internal-marks/`;
-      axios
-        .get(url, {})
-        .then(function (response) {
-          setData(response.data);
-        })
-        .catch(function (error) {
-          console.log("shit good luck; i ain't fixing that", error);
-        })
-        .finally(() => {
-          // console.log(data[1][0]);
-        });
+      if(localStorage.getItem('internal-marks') === null){
+        axios.defaults.headers.common['Authorization'] = `Bearer ${token}` 
+        const url = `/api/internal-marks/`;
+        axios
+          .get(url, {})
+          .then(function (response) {
+            setData(response.data);
+            localStorage.setItem('internal-marks', JSON.stringify(response.data));
+          })
+          .catch(function (error) {
+            console.log(error);
+            localStorage.clear();
+            navigate("/login");
+          })
+          .finally(() => {
+            // console.log(data[1][0]);
+          });
+
+      }
+      else{
+        setData(JSON.parse(localStorage.getItem('internal-marks')));
+      }
     }
 
   }
@@ -93,15 +86,6 @@ function Marks() {
 
   //
   //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
   // defines the columns in the table
   // the rows are supplied by the api backend
   const columns = [
@@ -114,13 +98,9 @@ function Marks() {
       label: "Marks",
     },
   ];
-  // const [semp, setSemp] = useState(1);
-  // const [catp, setCatp] = useState(0);
-  // const rows = data[semp][catp];
-  // console.log("rows", rows);
 
   if (data[1] === undefined) {
-    return <Audio />;
+    return <Audio className='center'/>;
   }
   const no_sems = Object.keys(data).length;
   if (rows === undefined) {

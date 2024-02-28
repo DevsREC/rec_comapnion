@@ -9,11 +9,6 @@ import {
   TableCell,
   getKeyValue,
   Pagination,
-  SortDescriptor,
-  PaginationItem,
-  PaginationCursor,
-  Button,
-  Image,
 } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 //debug
@@ -22,9 +17,9 @@ import { Audio } from "react-loader-spinner";
 
 function Grade() {
   // auth
+  const navigate = useNavigate();
   const [token, setToken] = useState("");
   const [sempage, setSempage] = useState(1);
-  const navigate = useNavigate();
   const [data, setData] = useState({});
   useEffect(() => {
     if (localStorage.getItem("JWT_TOKEN") === null) {
@@ -32,23 +27,30 @@ function Grade() {
       navigate("/login");
     } else {
       setToken(localStorage.getItem("JWT_TOKEN"));
-      console.log("token set", token)
     }
   }, []);
 
   const getData = () => {
-    if (token !== '') {
-      axios.defaults.headers.common['Authorization'] = `Bearer ${token}` 
-      const url = `/api/sem-marks/`;
-      axios
-        .get(url, {})
-        .then(function(response) {
-          setData(response.data);
-          console.log("grade:", data);
-        })
-        .catch(function(error) {
-          console.log(error);
-        });
+    if (token !== "") {
+      if(localStorage.getItem('sem-marks') === null){
+        axios.defaults.headers.common['Authorization'] = `Bearer ${token}` 
+        const url = `/api/sem-marks/`;
+        axios
+          .get(url, {})
+          .then(function(response) {
+            setData(response.data);
+            localStorage.setItem('sem-marks', JSON.stringify(response.data));
+            console.log("grade:", data);
+          })
+          .catch(function(error) {
+            console.log(error);
+            localStorage.clear();
+            navigate("/login");
+          });
+      }
+      else{
+        setData(JSON.parse(localStorage.getItem("sem-marks")));
+      }
     }
 
   };
