@@ -1,6 +1,7 @@
 import { React, useEffect, useState } from "react";
 import axios from "axios";
 import { Image } from "@nextui-org/react";
+import "./home.css"
 
 import "../index.css";
 import {
@@ -20,6 +21,10 @@ import Marks from "./Marks";
 import Grade from "./Grade";
 
 //debug
+caches.open("pwa-assets")
+.then(cache => {
+  cache.addAll(["/"]); // it stores two resources
+});
 
 function Home() {
   // auth
@@ -93,8 +98,8 @@ function Home() {
   useEffect(getPic, [token]);
 
   return (
-    <div className="center">
-      <Logout className="right" />
+    <div className="center px-unit-8 py-unit-8">
+      <Logout className="right px-unit-8 py-unit-8" />
       {/* <Login /> */}
       <Image
         loading="lazy"

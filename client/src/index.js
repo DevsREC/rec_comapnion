@@ -20,6 +20,12 @@ import {
   BrowserRouter,
 } from "react-router-dom";
 
+caches.open("pwa-assets")
+.then(cache => {
+  cache.addAll(["/", "index.js", "index.html", "/static/js/bundle.js", "/home", "manifest.json", "/app"]); // it stores two resources
+});
+
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -48,12 +54,13 @@ const router = createBrowserRouter([
   },
 ]);
 
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
     <GoogleOAuthProvider clientId="1096735290601-r734om3lj6l65al5f8gdnbrag3m3cieu.apps.googleusercontent.com">
   <React.StrictMode>
-    <NextUIProvider className="dark h-full w-full text-foreground bg-background">
-      <main className="dark text-foreground bg-background w-full h-full">
+    <NextUIProvider className="dark w-full h-full text-foreground bg-background">
+      <main className="dark text-foreground bg-background">
         <RouterProvider router={router} />
       </main>
     </NextUIProvider>
