@@ -19,6 +19,9 @@ import Logout from "../components/Logout"
 
 import Marks from "./Marks";
 import Grade from "./Grade";
+import Header from "../components/HeaderTop/Header";
+
+import { Button } from "@nextui-org/react";
 
 //debug
 caches.open("pwa-assets")
@@ -97,108 +100,89 @@ function Home() {
   };
   useEffect(getPic, [token]);
 
+  function onInternalsClick() {
+    navigate('/marks')
+  }
+
+  function onSemesterClick() {
+    navigate('/grade')
+  }
+
   return (
-    <div className="center px-unit-8 py-unit-8">
-      <Logout className="right px-unit-8 py-unit-8" />
-      {/* <Login /> */}
-      <Image
-        loading="lazy"
-        width={300}
-        alt="USER"
-        src={pic.image}
-        fallbackSrc="https://via.placeholder.com/300x300"
-      />
-      <Table radius="none" shadow="none" isStriped>
-        <TableHeader>
-          <TableColumn>NAME</TableColumn>
-          <TableColumn>ROLE</TableColumn>
-        </TableHeader>
-        <TableBody>
-          <TableRow key="1">
-            <TableCell>
-              <h2>ROLLNUMBER</h2>
-            </TableCell>
-            <TableCell>{data['RollNumber']}</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>
-              <h2>Blood Group</h2>
-            </TableCell>
-            <TableCell>{data["Blood Group"]}</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>
-              <h2>College Email</h2>
-            </TableCell>
-            <TableCell>{data["CollegeEmail"]}</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>
-              <h2>Course Name</h2>
-            </TableCell>
-            <TableCell>{data["CourseName"]}</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>
-              <h2>DATE OF BIRTH</h2>
-            </TableCell>
-            <TableCell>{data["DateOfBirth"]}</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>
-              <h2>DEPARTMENT</h2>
-            </TableCell>
-            <TableCell>{data["Department"]}</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>
-              <h2>NAME</h2>
-            </TableCell>
-            <TableCell>{data["Name"]}</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>
-              <h2>PLACE OF BIRTH</h2>
-            </TableCell>
-            <TableCell>{data["Place of Birth"]}</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>
-              <h2>Current Semester</h2>
-            </TableCell>
-            <TableCell>{data["Semester"]}</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>
-              <h2>Gender</h2>
-            </TableCell>
-            <TableCell>{data["Sex"]}</TableCell>
-          </TableRow>
+    <div className="center px-unit-8 py-unit-8 home-container">
+      <Header />
+      <div className="home-profile-container">
+        <h1 className="home-head">HOME</h1>
+        <div className="home-basic-detail-container">
+          <img src={pic.image} className="basic-detail-bg"></img>
+          <div className="img-dark-overlay"></div>
+          
+          <div className="personal-data-container">
+            <Image
+              className="main-profile-image"
+              loading="lazy"
+              width={300}
+              alt="USER"
+              src={pic.image}
+              fallbackSrc="https://via.placeholder.com/300x300"
+            />
 
-          <TableRow>
-            <TableCell>
-              <h2>CGPA</h2>
-            </TableCell>
-            <TableCell>{data["CGPA"]}</TableCell>
-          </TableRow>
+            <div className="person-detail-container">
+              <div className="person-val-cont">
+                <span className="person-field">Name: </span>
+                <span className="person-value">{data['Name']}</span>
+              </div>
+              <div className="person-val-cont">
+                <span className="person-field">Reg. No.: </span>
+                <span className="person-value">{data['RollNumber']}</span>
+              </div>
+              <div className="person-val-cont">
+                <span className="person-field">Department: </span>
+                <span className="person-value">{data['Department']}</span>
+              </div>
+              <div className="person-val-cont">
+                <span className="person-field">DOB: </span>
+                <span className="person-value">{data['DateOfBirth']}</span>
+              </div>
+              <div className="person-val-cont">
+                <span className="person-field">Native: </span>
+                <span className="person-value">{data['Place of Birth']}</span>
+              </div>
+              <div className="person-val-cont">
+                <span className="person-field">Blood Group: </span>
+                <span className="person-value">{data['Blood Group']}</span>
+              </div>
+              <div className="person-val-cont">
+                <span className="person-field">Semester: </span>
+                <span className="person-value">{data['Semester']}</span>
+              </div>
+              <div className="person-val-cont">
+                <span className="person-field">Attendance: </span>
+                <span className="person-value">{data['P_Percentage']}</span>
+              </div>
+              <div className="person-val-cont">
+                <span className="person-field">CGPA: </span>
+                <span className="person-value">{data['CGPA']}</span>
+              </div>
+              <div className="person-val-cont">
+                <span className="person-field">Arrear: </span>
+                <span className="person-value">{data['totalArrear'] || 0}</span>
+              </div>
+            </div>
 
-          <TableRow>
-            <TableCell>
-              <h2>Total Attendance</h2>
-            </TableCell>
-            <TableCell>{data["P_Percentage"]}</TableCell>
-          </TableRow>
+          </div>
+        </div>
+      </div>
+      <Button className="btn-home" color="secondary" onClick={onInternalsClick}>
+        Internal Marks
+      </Button>
+      <Button className="btn-home" color="secondary" onClick={onSemesterClick}>
+        Semester Marks
+      </Button>
 
-          <TableRow>
-            <TableCell>
-              <h2>Total Arrear</h2>
-            </TableCell>
-            <TableCell>{data["totalArrear"]}</TableCell>
-          </TableRow>
-        </TableBody>
-      </Table>
-      <Marks />
-      <Grade />
+      <Button className="btn-home" color="secondary" onClick={() => navigate('/rec360')}>
+        REC 360
+      </Button>
     </div>
   );
 }

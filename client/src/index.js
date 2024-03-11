@@ -19,6 +19,7 @@ import {
   RouterProvider,
   BrowserRouter,
 } from "react-router-dom";
+import Rec360 from "./pages/rec360/Rec360";
 
 caches.open("pwa-assets")
 .then(cache => {
@@ -52,6 +53,11 @@ const router = createBrowserRouter([
     element: <Grade />,
     loader: Audio,
   },
+  {
+    path: '/rec360',
+    element: <Rec360 />,
+    loader: Audio
+  }
 ]);
 
 

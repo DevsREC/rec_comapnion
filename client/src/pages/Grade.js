@@ -9,6 +9,7 @@ import {
   TableCell,
   getKeyValue,
   Pagination,
+  Button
 } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 //debug
@@ -109,6 +110,10 @@ function Grade() {
     return <h1>Loading</h1>;
   }
 
+  function onHomeClick() {
+    navigate('/home');
+  }
+
   // console.log(data[1][0]);
   //
   return (
@@ -145,6 +150,10 @@ function Grade() {
           )}
         </TableBody>
       </Table>
+
+      <Button color="secondary" className="btn-bottom" onClick={onHomeClick}>
+        Home
+      </Button>
     </div>
   );
 }

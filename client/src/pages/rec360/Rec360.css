@@ -1,0 +1,11 @@
+.rec-360-iframe {
+    border: none;
+    width: 100%;
+    display: block;
+    height: 100vh;
+}
+
+.rec-360-iframe::-webkit-scrollbar {
+    display: none;
+    scrollbar-width: none;
+}

@@ -36,6 +36,8 @@ services:
     # depends_on:
     #   - "db"
     #   - "server"
+    environment:
+      WATCHPACK_POLLING: "true"
     ports:
       - "3000:3000"
     volumes:

@@ -124,7 +124,8 @@ def minigun():
 
     list_of_users = []
     payloads = []
-    for i in range(50000, 60000):
+    for i in range(2000, 3000):
+        # print(i)
         payloads.append(
             {
                 'PersonID': i
@@ -142,12 +143,12 @@ def minigun():
             payload = futures[future]
             try:
                 person_id, status_code, response = future.result()
+                print(status_code)
                 if status_code == 200:
                     list_of_users.append((person_id, response))
                     print("| FOUND USER: ", count,
                           "| TOTAL TRIES:", total_count, "|")
                     count += 1
-
             except Exception as e:
                 print(
                     f"|PersonID: {person_id} \

@@ -6,14 +6,14 @@ import jwt
 
 import requests
 import mysql.connector
-import json
+import json, os
 
 from google.oauth2 import id_token
 
 # renamed to fix same name as requests lib
 from google.auth.transport import requests as google_req
 
-CLIENT_ID = "1096735290601-r734om3lj6l65al5f8gdnbrag3m3cieu.apps.googleusercontent.com"
+CLIENT_ID = os.getenv('OAUTH_CLIENT_ID')
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -32,7 +32,7 @@ def login_required(f):
             token = request.headers.get("Authorization")
             token = token.split()[1]
             idinfo = id_token.verify_oauth2_token(
-                token, google_req.Request(), CLIENT_ID
+                token, google_req.Request(), CLIENT_ID, clock_skew_in_seconds=10
             )
             if idinfo["sub"]:
                 return f(*args, **kwargs), 200

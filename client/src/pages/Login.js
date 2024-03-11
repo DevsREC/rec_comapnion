@@ -5,6 +5,8 @@ import {GoogleLogin, googleLogout} from '@react-oauth/google';
 import { jwtDecode } from "jwt-decode";
 import Logo from '../components/Logo';
 
+import './login.css';
+
 function Login() {
 
   const navigate = useNavigate();
@@ -47,7 +49,7 @@ function Login() {
 
   return (
     <div className="dark w-full h-full login" style={{colorScheme: 'light'}}>
-    <Logo />
+      <Logo />
       <GoogleLogin 
         onSuccess={responseMessage} 
         onError={errorMessage} 

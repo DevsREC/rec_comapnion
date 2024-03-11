@@ -9,6 +9,7 @@ import {
   TableCell,
   getKeyValue,
   Pagination,
+  Button,
   // PaginationItem,
   // PaginationCursor,
   // Button,
@@ -18,6 +19,8 @@ import { useNavigate } from "react-router-dom";
 //debug
 import { Audio } from "react-loader-spinner";
 //
+
+import './marks.css';
 
 function Marks() {
   // auth
@@ -107,6 +110,10 @@ function Marks() {
     return <h1>Loading</h1>;
   }
 
+  function onHomeClick() {
+    navigate('/home');
+  }
+
   // console.log(data[1][0]);
   //
   return (
@@ -117,7 +124,7 @@ function Marks() {
         isStriped
         topContent={
           <div>
-            <h1>Semester</h1>
+            <h1>Internals</h1>
             <Pagination
               showControls
               color="secondary"
@@ -153,6 +160,10 @@ function Marks() {
           )}
         </TableBody>
       </Table>
+
+      <Button color="secondary" className="btn-bottom" onClick={onHomeClick}>
+        Home
+      </Button>
     </div>
   );
 }

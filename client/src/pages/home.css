@@ -1,0 +1,92 @@
+body {
+    background-color: #000;
+}
+
+/* Page title */
+
+.home-head {
+    font-size: 1.3rem;
+    font-weight: bold;
+    text-align: center;
+    letter-spacing: .1rem;
+    margin-top: 10px;
+}
+
+/* Profile Styles */
+
+main {
+    height: max-content !important;
+}
+.home-profile-container {
+    margin-top: 80px;
+}
+
+.home-basic-detail-container {
+    width: 98%;
+    margin: 20px auto;
+    position: relative;
+    height: max-content;
+    min-height: 400px;
+    max-height: 600px;
+    padding: 5px;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.basic-detail-bg {
+    display: block;
+    width: 100% !important;
+    object-fit: cover;
+    filter: blur(15px);
+    z-index: 4;
+}
+
+.img-dark-overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 5;
+    background-color: rgba(0, 0, 0, 0.473);
+}
+
+
+.personal-data-container > div {
+    position: unset;
+}
+.main-profile-image {
+    display: block;
+    width: 70%;
+    margin: 10px auto;
+}
+
+.personal-data-container {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    place-items: center;
+    z-index: 11;
+}
+
+.person-val-cont {
+    padding: 5px;
+}
+
+.person-field {
+    font-size: .9rem;
+    font-weight: 600;
+}
+
+.person-value {
+    font-size: .9rem;
+    font-weight: 400;
+}
+
+.btn-home {
+    display: block;
+    margin: 10px auto;
+}
