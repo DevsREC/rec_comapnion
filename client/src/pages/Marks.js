@@ -21,6 +21,8 @@ import { Audio } from "react-loader-spinner";
 //
 
 import './marks.css';
+import Footer from "../components/Footer/Footer";
+import Header from "../components/HeaderTop/Header";
 
 function Marks() {
   // auth
@@ -118,7 +120,9 @@ function Marks() {
   //
   return (
     <div className="bg-background text-foreground">
+      <Header />
       <Table
+        className="marks-table"
         radius="none"
         shadow="none"
         isStriped
@@ -164,6 +168,7 @@ function Marks() {
       <Button color="secondary" className="btn-bottom" onClick={onHomeClick}>
         Home
       </Button>
+      <Footer />
     </div>
   );
 }

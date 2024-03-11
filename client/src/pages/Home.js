@@ -22,6 +22,7 @@ import Grade from "./Grade";
 import Header from "../components/HeaderTop/Header";
 
 import { Button } from "@nextui-org/react";
+import Footer from "../components/Footer/Footer";
 
 //debug
 caches.open("pwa-assets")
@@ -183,6 +184,8 @@ function Home() {
       <Button className="btn-home" color="secondary" onClick={() => navigate('/rec360')}>
         REC 360
       </Button>
+
+      <Footer />
     </div>
   );
 }

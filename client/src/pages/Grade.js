@@ -14,6 +14,8 @@ import {
 import { useNavigate } from "react-router-dom";
 //debug
 import { Audio } from "react-loader-spinner";
+import Footer from "../components/Footer/Footer";
+import Header from "../components/HeaderTop/Header";
 //
 
 function Grade() {
@@ -118,7 +120,10 @@ function Grade() {
   //
   return (
     <div>
+      <Header />
+      
       <Table
+        className="marks-table"
         radius="none"
         shadow="none"
         isStriped
@@ -154,6 +159,8 @@ function Grade() {
       <Button color="secondary" className="btn-bottom" onClick={onHomeClick}>
         Home
       </Button>
+
+      <Footer />
     </div>
   );
 }

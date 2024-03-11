@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@nextui-org/react";
 
 import './Rec360.css';
+import Footer from "../../components/Footer/Footer";
 
 export default function Rec360() {
     
@@ -19,6 +20,7 @@ export default function Rec360() {
             <Button color="secondary" className="btn-bottom" onClick={onHomeClick}>
                 Home
             </Button>
+            <Footer />
         </div>
     )
 }

@@ -1,0 +1,85 @@
+.about-us-content-container {
+    margin-top: 80px;
+}
+
+.about-us-content-container h1 {
+    display: block;
+    font-size: 1.3rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+.about-club-container {
+    width: 300px;
+    height: max-content;
+    padding: 5px;
+    border: 2px solid #292929a9;
+    margin: 10px auto;
+    border-radius: 10px;
+    transition: .3s ease;
+    background-color: #000;
+}
+
+.club-image-container {
+    width: 90%;
+    margin: 5px auto;
+    height: 120px;
+}
+
+.club-image {
+    display: block;
+    height: 100%;
+    margin: 5px auto;
+}
+
+.club-detail-container {
+    padding: 5px;
+    text-align: justify;
+    font-size: .8rem;
+    line-height: 1.4rem;
+    font-weight: 400;
+    width: 90%;
+    margin: 2px auto;
+}
+
+.about-club-container:hover {
+    border-color: #292929;
+    background-color: #111010;
+}
+
+
+.social-links-container {
+    margin: 2px auto;
+    padding: 10px;
+    min-width: 50%;
+    max-width: 90%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.social-link-container {
+    width: 40px;
+    height: 40px;
+    text-decoration: none;
+    color: #fff;
+    display: grid;
+    place-items: center;
+    border: 1px solid transparent;
+    transition: .3s ease;
+    border-radius: 50%;
+}
+
+.social-link-container svg {
+    transition: .3s ease;
+}
+
+.social-link-container:hover {
+    border-color: #fff;
+}
+
+.social-link-container:hover.social-link-container svg {
+    transform: rotate3d(1, 1, 1, 360deg);
+    scale: 1.1;
+}
