@@ -30,6 +30,38 @@ services:
     networks:
       - private
 
+  # mongodb:
+  #   image: mongo:latest
+  #   ports:
+  #     - "27017:27017"
+  #   volumes:
+  #     - ./mongodb:/data/db
+  #   networks:
+  #     - private
+  
+  # clubhubclient:
+  #   build: ./clubhub_frontend
+  #   environment:
+  #     WATCHPACK_POLLING: "true"
+  #   ports:
+  #     - "3002:3002"
+  #   volumes:
+  #     - ./clubhub_frontend/:/app
+  #   command:
+  #     sh -c "npm install && npm start"
+  #   networks:
+  #     - public
+  #     - private
+
+  # clubhubserver:
+  #   build: ./clubhub_server
+  #   ports:
+  #     - "8081:8080"
+  #   volumes:
+  #     - ./clubhub_server/:/app
+  #   networks:
+  #     - private
+
   client:
     build: ./client
     # client need to depend on db or server since it doesn't need them to function during building process

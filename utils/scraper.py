@@ -124,7 +124,7 @@ def minigun():
 
     list_of_users = []
     payloads = []
-    for i in range(2000, 3000):
+    for i in range(29000, 30000):
         # print(i)
         payloads.append(
             {
@@ -191,7 +191,6 @@ def minigun():
 
 
 if __name__ == "__main__":
-
     # create_database()
     # delete_user_table()
     # create_user_table()

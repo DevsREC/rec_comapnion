@@ -1,6 +1,11 @@
 from flask import Flask, request
 from flask_cors import CORS
 
+import requests
+from bs4 import BeautifulSoup
+from datetime import datetime, timedelta
+from apscheduler.schedulers.background import BackgroundScheduler
+
 from functools import wraps
 import jwt
 
@@ -23,6 +28,10 @@ app.config["JWT_TOKEN_LOCATION"] = "headers"
 app.config["JWT_HEADER_NAME"] = "Authorization"
 app.config["JWT_HEADER_TYPE"] = "Bearer"
 
+
+# For Rec transport
+ROOT_URL = 'https://www.rectransport.com/'
+# response_to_send = []
 
 def login_required(f):
     @wraps(f)
@@ -437,6 +446,92 @@ def get_attendance(rollno):
     data = json.loads(data)
     return data
 
+def extract_href_from_class(url, class_name):
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+        soup = BeautifulSoup(response.content, 'html.parser')
+
+        elements = soup.find_all(class_=class_name)
+
+        href_values = [element.get('href') for element in elements if element.get('href')]
+
+        return href_values
+
+    except requests.exceptions.RequestException as e:
+        print("Error:", e)
+        return None
+    
+def get_route_details(route_url):
+    try:
+        response = requests.get(route_url)
+        response.raise_for_status()
+        soup = BeautifulSoup(response.content, 'html.parser')
+        # print(soup)
+        rows = soup.find_all('tr')
+
+        bus_point_with_time = []
+        for row in rows:
+            columns = row.find_all('td')
+            if len(columns) == 2:
+                bpt_value = columns[0].get_text().strip()
+                tim_value = columns[1].get_text().strip()
+                bus_point_with_time.append({'pointName': bpt_value, 'pointTime': tim_value})
+        
+        route_name = soup.find(class_ = 'bbpt').get_text()
+        if '.' in route_name:
+            route_name = route_name.split('.')
+        elif '-' in route_name:
+            route_name = route_name.split('-')
+        else:
+            route_name = route_name.split(' ')
+        bNo = route_name[0]
+        bpt = route_name[-1].strip()
+
+        return {
+            'busNo': bNo,
+            'bpt': bpt,
+            'routes': bus_point_with_time
+        }
+    except Exception as e:
+        print('Fucked Up!')
+        print(e)
+        return None
+    
+def getBus():
+    print('I\'m running')
+    today_date = (datetime.now() + timedelta(days=1)).strftime('%d')
+    print(today_date)
+    # tomorrow_date = (datetime.now() + timedelta(days=1)).strftime('%d')
+    this_month = datetime.now().strftime('%b').lower()
+    
+    url1 = "https://www.rectransport.com/" + str(this_month) + str(today_date) + '.php'
+    class_name = "info"
+    print(url1)
+    res1 = extract_href_from_class(url1, class_name)
+    print(res1)
+    l = []
+    for i in res1:
+        route_url = ROOT_URL + '/' + i
+        d = get_route_details(route_url)
+        l.append(d)
+    return l
+
+busResponse = []
+
+@app.route('/get-bus')
+def getBus1():
+    return busResponse
+
+def start_scheduler():
+    scheduler = BackgroundScheduler(daemon=True)
+    scheduler.add_job(getBus, 'interval', hours=24)
+    scheduler.start()
+    
+# getBus()
 
 if __name__ == "__main__":
+    start_scheduler()
+    busResponse = getBus()
     app.run(host="0.0.0.0", port=5000, debug=True)
+    app.run(use_reloader=True)

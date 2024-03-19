@@ -21,6 +21,7 @@ import {
 } from "react-router-dom";
 import Rec360 from "./pages/rec360/Rec360";
 import AboutUs from "./pages/AboutUs/AboutUs";
+import RecTransport from "./pages/RecTransport/RecTransport";
 
 caches.open("pwa-assets")
 .then(cache => {
@@ -62,6 +63,11 @@ const router = createBrowserRouter([
   {
     path: '/aboutus',
     element: <AboutUs />,
+    loader: Audio
+  },
+  {
+    path: '/transport',
+    element: <RecTransport />,
     loader: Audio
   }
 ]);

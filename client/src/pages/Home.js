@@ -185,6 +185,10 @@ function Home() {
         REC 360
       </Button>
 
+      <Button className="btn-home" color="secondary" onClick={() => navigate('/transport')}>
+        REC transport
+      </Button>
+
       <Footer />
     </div>
   );

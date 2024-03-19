@@ -1,0 +1,50 @@
+.bus-cont-container {
+    margin-top: 70px;
+}
+
+.bus-cont-container h1 {
+    padding-top: 20px;
+}
+
+.transport-search {
+    display: block;
+    min-width: 295px;
+    border: 2px solid transparent;
+    outline: 2px solid transparent;
+    height: 45px;
+    border-radius: 25px;
+    padding: 5px 10px;
+    color: #a9a9a9;
+    margin: 10px auto;
+    transition: .3s ease;
+    font-size: 1rem;
+    font-weight: 400;
+    background-color: #181818;
+}
+
+.transport-search:focus {
+    outline-color: rgb(197, 197, 197);
+}
+
+.trans-head-container {
+    width: 300px;
+    display: flex;
+    height: 60px;
+    justify-content: space-between;
+    padding: 5px;
+    align-items: center;
+    margin: 10px auto;
+}
+
+.trans-head-container span {
+    display: block;
+    font-size: .9rem;
+    font-weight: 500;
+    color: #a9a9a9;
+}
+
+.bus-cards-container p{
+    display: block;
+    height: 50vh;
+    text-align: center;
+}
