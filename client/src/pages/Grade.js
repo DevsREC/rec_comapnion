@@ -16,6 +16,7 @@ import { useNavigate } from "react-router-dom";
 import { Audio } from "react-loader-spinner";
 import Footer from "../components/Footer/Footer";
 import Header from "../components/HeaderTop/Header";
+import NavbarBottom from "../components/NavbarBottom/NavbarBottom";
 //
 
 function Grade() {
@@ -159,8 +160,8 @@ function Grade() {
       <Button color="secondary" className="btn-bottom" onClick={onHomeClick}>
         Home
       </Button>
-
-      <Footer />
+      <NavbarBottom />
+      {/* <Footer /> */}
     </div>
   );
 }

@@ -9,12 +9,17 @@ import Header from "../../components/HeaderTop/Header";
 import Footer from "../../components/Footer/Footer";
 import BusCard from "../../components/BusCard/BusCard";
 import axios from "axios";
+import NavbarBottom from "../../components/NavbarBottom/NavbarBottom";
 
 export default function RecTransport() {
     const navigate = useNavigate();
 
     const [cardData, setCardData] = useState([]);
     const [busCards, setBusCards] = useState([])
+
+    useEffect(() => {
+        window.scroll(0, 0);
+    }, [])
 
     async function getBus() {
         const url = '/api/get-bus';
@@ -56,11 +61,8 @@ export default function RecTransport() {
                     {busCards.length == 0? <p><span>Sunday</span> or <span>Monday</span></p>: busCards}
                 </div>
             </div>
-
-            <Button color="secondary" className="btn-bottom" onClick={() => navigate('/home')}>
-                Home
-            </Button>
-            <Footer />
+            <NavbarBottom />
+            {/* <Footer /> */}
         </div>
     )
 }

@@ -1,0 +1,15 @@
+.mark-page-container {
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.mark-page-container .btn {
+    margin: 20px auto;
+}
+
+.marks-table {
+    margin-bottom: 100px;
+}

@@ -500,7 +500,8 @@ def get_route_details(route_url):
     
 def getBus():
     print('I\'m running')
-    today_date = (datetime.now() + timedelta(days=1)).strftime('%d')
+    # today_date = (datetime.now() + timedelta(days=1)).strftime('%d')
+    today_date = datetime.now().strftime('%d')
     print(today_date)
     # tomorrow_date = (datetime.now() + timedelta(days=1)).strftime('%d')
     this_month = datetime.now().strftime('%b').lower()

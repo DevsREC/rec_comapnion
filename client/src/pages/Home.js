@@ -23,6 +23,7 @@ import Header from "../components/HeaderTop/Header";
 
 import { Button } from "@nextui-org/react";
 import Footer from "../components/Footer/Footer";
+import NavbarBottom from "../components/NavbarBottom/NavbarBottom";
 
 //debug
 caches.open("pwa-assets")
@@ -101,13 +102,9 @@ function Home() {
   };
   useEffect(getPic, [token]);
 
-  function onInternalsClick() {
-    navigate('/marks')
-  }
-
-  function onSemesterClick() {
-    navigate('/grade')
-  }
+  useEffect(() => {
+    window.scroll(0, 0);
+}, [])
 
   return (
     <div className="center px-unit-8 py-unit-8 home-container">
@@ -174,22 +171,7 @@ function Home() {
           </div>
         </div>
       </div>
-      <Button className="btn-home" color="secondary" onClick={onInternalsClick}>
-        Internal Marks
-      </Button>
-      <Button className="btn-home" color="secondary" onClick={onSemesterClick}>
-        Semester Marks
-      </Button>
-
-      <Button className="btn-home" color="secondary" onClick={() => navigate('/rec360')}>
-        REC 360
-      </Button>
-
-      <Button className="btn-home" color="secondary" onClick={() => navigate('/transport')}>
-        REC transport
-      </Button>
-
-      <Footer />
+      <NavbarBottom />
     </div>
   );
 }

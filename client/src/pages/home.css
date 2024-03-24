@@ -19,6 +19,11 @@ main {
 }
 .home-profile-container {
     margin-top: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    flex-direction: column;
 }
 
 .home-basic-detail-container {

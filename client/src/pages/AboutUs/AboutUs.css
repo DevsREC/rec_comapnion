@@ -83,3 +83,7 @@
     transform: rotate3d(1, 1, 1, 360deg);
     scale: 1.1;
 }
+
+.about-us-team-container {
+    height: max-content;
+}

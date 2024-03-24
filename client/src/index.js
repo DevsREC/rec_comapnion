@@ -22,6 +22,8 @@ import {
 import Rec360 from "./pages/rec360/Rec360";
 import AboutUs from "./pages/AboutUs/AboutUs";
 import RecTransport from "./pages/RecTransport/RecTransport";
+import NavbarBottom from "./components/NavbarBottom/NavbarBottom";
+import MarksPage from "./pages/MarksPage/MarksPage";
 
 caches.open("pwa-assets")
 .then(cache => {
@@ -54,6 +56,11 @@ const router = createBrowserRouter([
     path: "/grade",
     element: <Grade />,
     loader: Audio,
+  },
+  {
+    path: '/mp',
+    element: <MarksPage />,
+    loader: Audio
   },
   {
     path: '/rec360',

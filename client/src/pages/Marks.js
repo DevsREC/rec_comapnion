@@ -23,6 +23,7 @@ import { Audio } from "react-loader-spinner";
 import './marks.css';
 import Footer from "../components/Footer/Footer";
 import Header from "../components/HeaderTop/Header";
+import NavbarBottom from "../components/NavbarBottom/NavbarBottom";
 
 function Marks() {
   // auth
@@ -164,11 +165,7 @@ function Marks() {
           )}
         </TableBody>
       </Table>
-
-      <Button color="secondary" className="btn-bottom" onClick={onHomeClick}>
-        Home
-      </Button>
-      <Footer />
+      <NavbarBottom />
     </div>
   );
 }

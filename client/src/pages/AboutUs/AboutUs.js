@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { Button } from "@nextui-org/react";
@@ -7,12 +7,16 @@ import './AboutUs.css';
 
 import clubLogo from '../../img/logo.png'
 import rithesh from '../../img/rithesh.png'
+import rithesh_full from '../../img/rithesh_full.webp'
 import swayam from '../../img/swayam.png'
+import swayam_full from '../../img/swayam_full.jpeg'
 import vignesh from '../../img/vignesh.png'
+import vignesh_full from '../../img/vignesh_full.jpg'
 
 import Footer from "../../components/Footer/Footer";
 import Header from "../../components/HeaderTop/Header";
 import TeamCard from "../../components/TeamCard/TeamCard";
+import NavbarBottom from "../../components/NavbarBottom/NavbarBottom";
 
 export default function AboutUs() {
 
@@ -21,6 +25,10 @@ export default function AboutUs() {
     function onHomeClick() {
         navigate('/home');
     }
+
+    useEffect(() => {
+        window.scroll(0, 0);
+    }, [])
 
     return(
         <div className="about-us-container">
@@ -81,6 +89,7 @@ export default function AboutUs() {
                         teamLink1={'https://github.com/Raxen001'}
                         teamLink2={'https://www.linkedin.com/in/rithesh-s-05617b22a/'}
                         teamLink3={'https://www.instagram.com/raxen001'}
+                        teamFullImg={rithesh_full}
                     />
                     <TeamCard
                         teamImg={swayam}
@@ -89,6 +98,7 @@ export default function AboutUs() {
                         teamLink1={'https://github.com/swayammedia'}
                         teamLink2={'https://www.linkedin.com/in/devswayam/'}
                         teamLink3={'https://instagram.com/swayam_ceo?igshid=ZDdkNTZiNTM='}
+                        teamFullImg={swayam_full}
                     />
                     <TeamCard
                         teamImg={vignesh}
@@ -97,14 +107,17 @@ export default function AboutUs() {
                         teamLink1={'https://github.com/Alien501'}
                         teamLink2={'https://www.linkedin.com/in/vignesh-chellapandi-2207b5257/'}
                         teamLink3={'#'}
+                        teamFullImg={vignesh_full}
                     />
                 </div>
             </div>
 
+            {/* Don't Remove this */}
             <Button color="secondary" className="btn-bottom" onClick={onHomeClick}>
                 Home
             </Button>
-            <Footer />
+            
+            <NavbarBottom />
         </div>
     )
 }
