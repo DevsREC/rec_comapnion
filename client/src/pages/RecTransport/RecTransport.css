@@ -48,3 +48,8 @@
     height: 50vh;
     text-align: center;
 }
+
+.empty {
+    width: 100%;
+    height: 100px;
+}

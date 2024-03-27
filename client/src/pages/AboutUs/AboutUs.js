@@ -9,9 +9,9 @@ import clubLogo from '../../img/logo.png'
 import rithesh from '../../img/rithesh.png'
 import rithesh_full from '../../img/rithesh_full.webp'
 import swayam from '../../img/swayam.png'
-import swayam_full from '../../img/swayam_full.jpeg'
+import swayam_full from '../../img/swayam_full.webp'
 import vignesh from '../../img/vignesh.png'
-import vignesh_full from '../../img/vignesh_full.jpg'
+import vignesh_full from '../../img/vignesh_full.webp'
 
 import Footer from "../../components/Footer/Footer";
 import Header from "../../components/HeaderTop/Header";

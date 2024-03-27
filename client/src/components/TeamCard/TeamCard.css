@@ -90,16 +90,6 @@
     top: 0;
     bottom: 0;
     display: block;
-    filter: blur(10px) contrast(10px);
     height: 100%;
     object-fit: cover;
 }
-
-/* .team-image-container {
-    transform: translate3d(0, -60%, 0);
-    transition: .3s ease;
-}
-
-.team-image-container .active {
-    transform: translate3d(0, 0, 0);
-} */

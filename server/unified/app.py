@@ -5,6 +5,7 @@ import requests
 from bs4 import BeautifulSoup
 from datetime import datetime, timedelta
 from apscheduler.schedulers.background import BackgroundScheduler
+from apscheduler.triggers.cron import CronTrigger
 
 from functools import wraps
 import jwt
@@ -526,7 +527,7 @@ def getBus1():
 
 def start_scheduler():
     scheduler = BackgroundScheduler(daemon=True)
-    scheduler.add_job(getBus, 'interval', hours=24)
+    scheduler.add_job(getBus, CronTrigger(hour=0))
     scheduler.start()
     
 # getBus()

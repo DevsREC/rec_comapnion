@@ -7,7 +7,7 @@ export default function TeamCard({teamImg, teamName, teamRole, teamLink1, teamLi
     return(
         <div className="team-card-container" onMouseEnter={() => setIsClicked(true)} onMouseLeave={() => setIsClicked(false)}>
             <div className="team-image-container">
-                <img loading="lazy" className={`team-img ${isClicked? 'active': ''}`} src={teamImg} alt={teamName}></img>
+                <img className={`team-img ${isClicked? 'active': ''}`} src={teamImg} alt={teamName}></img>
             </div>
             <div className={`team-card-detail-container ${isClicked? 'active': ''}`}>
                 <div className="team-name-container">{teamName}</div>

@@ -2,7 +2,7 @@
     border: none;
     width: 100%;
     display: block;
-    height: 100vh;
+    height: 80%;
 }
 
 .rec-360-iframe::-webkit-scrollbar {
