@@ -24,6 +24,7 @@ import AboutUs from "./pages/AboutUs/AboutUs";
 import RecTransport from "./pages/RecTransport/RecTransport";
 import NavbarBottom from "./components/NavbarBottom/NavbarBottom";
 import MarksPage from "./pages/MarksPage/MarksPage";
+import ClubHub from "./pages/ClubHub/ClubHub";
 
 caches.open("pwa-assets")
 .then(cache => {
@@ -75,6 +76,11 @@ const router = createBrowserRouter([
   {
     path: '/transport',
     element: <RecTransport />,
+    loader: Audio
+  },
+  {
+    path: '/clubhub',
+    element: <ClubHub />,
     loader: Audio
   }
 ]);

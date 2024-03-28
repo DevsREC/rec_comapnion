@@ -24,7 +24,7 @@ export default function NavbarBottom() {
                     Home
                 </span>
             </Link>
-            <Link to={'/mp'} className={`nav-bottom-container ${isActive('/mp')? 'active': ''}`}>
+            {/* <Link to={'/mp'} className={`nav-bottom-container ${isActive('/mp')? 'active': ''}`}>
                 <span className="nav-icon-container">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-file-earmark-bar-graph" viewBox="0 0 16 16">
                         <path d="M10 13.5a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-6a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5zm-2.5.5a.5.5 0 0 1-.5-.5v-4a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5zm-3 0a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5z"/>
@@ -33,6 +33,17 @@ export default function NavbarBottom() {
                 </span>
                 <span className="nav-desc-container">
                     Marks
+                </span>
+            </Link> */}
+            <Link to={'/clubhub'} className={`nav-bottom-container ${isActive('/clubhub')? 'active': ''}`}>
+                <span className="nav-icon-container">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-disc" viewBox="0 0 16 16">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                        <path d="M10 8a2 2 0 1 1-4 0 2 2 0 0 1 4 0M8 4a4 4 0 0 0-4 4 .5.5 0 0 1-1 0 5 5 0 0 1 5-5 .5.5 0 0 1 0 1m4.5 3.5a.5.5 0 0 1 .5.5 5 5 0 0 1-5 5 .5.5 0 0 1 0-1 4 4 0 0 0 4-4 .5.5 0 0 1 .5-.5"/>
+                    </svg>
+                </span>
+                <span className="nav-desc-container">
+                    Clubhub
                 </span>
             </Link>
             <Link to={'/rec360'} className={`nav-bottom-container ${isActive('/rec360')? 'active': ''}`}>

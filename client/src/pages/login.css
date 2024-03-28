@@ -2,3 +2,35 @@
     height: 100vh;
     overflow: hidden;
 }
+
+/* .login > img {
+    height: 190px !important;
+} */
+
+.login-logo {
+    display: block;
+    object-fit: contain;
+    width: 95%;
+}
+
+.login-logo-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+.login-logo-top {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.login-logo-top img{
+    display: block;
+    width: 100px;
+}
+
+.login-logo-bottom img {
+    margin: 0px auto;
+}

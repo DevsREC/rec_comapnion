@@ -5,6 +5,10 @@ import {GoogleLogin, googleLogout} from '@react-oauth/google';
 import { jwtDecode } from "jwt-decode";
 import Logo from '../components/Logo';
 
+import logo_pic from "../img/logo.png";
+import rec_logo from '../img/reclogo.png'
+
+
 import './login.css';
 
 function Login() {
@@ -49,7 +53,15 @@ function Login() {
 
   return (
     <div className="dark w-full h-full login" style={{colorScheme: 'light'}}>
-      <Logo />
+      <div className="login-logo-container">
+        <div className="login-logo-top">
+          <Logo logoPath={rec_logo}/>
+          <Logo logoPath={logo_pic}/>
+        </div>
+        <div className="login-logo-bottom">
+          <Logo logoPath={logo_pic}/>
+        </div>
+      </div>
       <GoogleLogin 
         onSuccess={responseMessage} 
         onError={errorMessage} 
