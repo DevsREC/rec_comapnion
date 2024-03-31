@@ -165,6 +165,12 @@ function Marks() {
           )}
         </TableBody>
       </Table>
+      <Button color="secondary" style={
+        {
+          margin: '0px auto',
+          display: 'block'
+        }
+      } onClick={() => navigate(-1)}>Go back</Button>
       <NavbarBottom />
     </div>
   );

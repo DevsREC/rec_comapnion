@@ -29,7 +29,7 @@
 
 .team-card-detail-container {
     position: relative;
-    transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 120%, 0);
     transition: .3s cubic-bezier(.86,-0.07,.45,.99);   
     z-index: 15;
 }
@@ -91,5 +91,6 @@
     bottom: 0;
     display: block;
     height: 100%;
+    width: 100%;
     object-fit: cover;
 }

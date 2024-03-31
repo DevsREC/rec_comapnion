@@ -10,8 +10,10 @@ import rithesh from '../../img/rithesh.png'
 import rithesh_full from '../../img/rithesh_full.webp'
 import swayam from '../../img/swayam.png'
 import swayam_full from '../../img/swayam_full.webp'
-import vignesh from '../../img/vignesh.png'
+import vignesh from '../../img/vignesh.webp'
 import vignesh_full from '../../img/vignesh_full.webp'
+import thiru from '../../img/thiru.webp'
+import thiru_full from '../../img/thiru_full.webp'
 
 import Footer from "../../components/Footer/Footer";
 import Header from "../../components/HeaderTop/Header";
@@ -108,6 +110,15 @@ export default function AboutUs() {
                         teamLink2={'https://www.linkedin.com/in/vignesh-chellapandi-2207b5257/'}
                         teamLink3={'#'}
                         teamFullImg={vignesh_full}
+                    />
+                    <TeamCard
+                        teamImg={thiru}
+                        teamName={'Thirumurugan'}
+                        teamRole={'Team Member'}
+                        teamLink1={'https://github.com/AKSTHIRUMURUGAN'}
+                        teamLink2={'https://www.linkedin.com/in/a-k-s-thirumurugan-57b230211?trk=contact-info'}
+                        teamLink3={'https://www.instagram.com/thirumurugan374/'}
+                        teamFullImg={thiru_full}
                     />
                 </div>
             </div>

@@ -157,6 +157,13 @@ function Grade() {
         </TableBody>
       </Table>
 
+      <Button color="secondary" style={
+        {
+          margin: '50px auto',
+          display: 'block'
+        }
+      } onClick={() => navigate(-1)}>Go back</Button>
+
       <Button color="secondary" className="btn-bottom" onClick={onHomeClick}>
         Home
       </Button>
