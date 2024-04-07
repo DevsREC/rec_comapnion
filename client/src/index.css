@@ -36,9 +36,19 @@ main {
 html,
 body {
   background: black;
+  scrollbar-width: none;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+iframe body::-webkit-scrollbar {
+  display: none;
 }

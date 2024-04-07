@@ -186,6 +186,7 @@ function Home() {
                 Marks
           </Button>
       </div>
+      <div className="empty"></div>
       <NavbarBottom />
     </div>
   );

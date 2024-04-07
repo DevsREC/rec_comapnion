@@ -1,5 +1,6 @@
 .login {
     height: 100vh;
+    justify-content: space-evenly;
     overflow: hidden;
 }
 
@@ -18,6 +19,7 @@
     flex-direction: column;
     justify-content: space-evenly;
     width: 100%;
+    height: 70%;
 }
 
 .login-logo-top {
@@ -33,6 +35,11 @@
 
 .login-logo-bottom img {
     margin: 0px auto;
-    width: 200px;
-    height: 200px;
+    width: 160px;
+    height: 160px;
+    padding: 5px;
+}
+
+.login-logo-container + div {
+    margin-top: 20px;
 }

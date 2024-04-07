@@ -7,6 +7,7 @@ import Logo from '../components/Logo';
 
 import logo_pic from "../img/logo.png";
 import rec_logo from '../img/reclogo.png'
+import comp_logo from '../img/rec_comp_logo.png'
 
 
 import './login.css';
@@ -59,9 +60,10 @@ function Login() {
           <Logo logoPath={logo_pic}/>
         </div>
         <div className="login-logo-bottom">
-          <Logo logoPath={logo_pic}/>
+          <Logo logoPath={comp_logo}/>
         </div>
       </div>
+      
       <GoogleLogin 
         onSuccess={responseMessage} 
         onError={errorMessage} 

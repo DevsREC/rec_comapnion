@@ -123,10 +123,7 @@ export default function AboutUs() {
                 </div>
             </div>
 
-            {/* Don't Remove this */}
-            <Button color="secondary" className="btn-bottom" onClick={onHomeClick}>
-                Home
-            </Button>
+            <div className="empty"></div>
             
             <NavbarBottom />
         </div>

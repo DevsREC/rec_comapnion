@@ -171,6 +171,7 @@ function Marks() {
           display: 'block'
         }
       } onClick={() => navigate(-1)}>Go back</Button>
+      <div className="empty"></div>
       <NavbarBottom />
     </div>
   );

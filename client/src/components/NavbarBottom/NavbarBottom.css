@@ -26,6 +26,7 @@
     justify-content: space-evenly;
     align-items: center;
     border-radius: 50%;
+    transition: .3s ease;
 }
 
 .nav-desc-container {
@@ -44,4 +45,5 @@
 .nav-bottom-container.active .nav-icon-container,
 .nav-bottom-container:hover .nav-icon-container {
     background-color: #9135fb79;
+    transition: all .3s;
 }

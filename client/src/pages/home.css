@@ -95,3 +95,8 @@ main {
     display: block;
     margin: 10px auto;
 }
+
+.person-detail-container {
+    /* height: 100%; */
+    overflow: scroll;
+}

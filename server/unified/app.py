@@ -495,8 +495,8 @@ def get_route_details(route_url):
             'routes': bus_point_with_time
         }
     except Exception as e:
-        print('Fucked Up!')
-        print(e)
+        # print('Fucked Up!')
+        # print(e)
         return None
     
 def getBus():
@@ -513,11 +513,13 @@ def getBus():
     res1 = extract_href_from_class(url1, class_name)
     print(res1)
     l = []
-    for i in res1:
-        route_url = ROOT_URL + '/' + i
-        d = get_route_details(route_url)
-        l.append(d)
-    return l
+    if res1 != None:
+        for i in res1:
+            route_url = ROOT_URL + '/' + i
+            d = get_route_details(route_url)
+            l.append(d)
+        return l
+    return []
 
 busResponse = []
 

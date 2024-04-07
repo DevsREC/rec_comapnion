@@ -163,10 +163,10 @@ function Grade() {
           display: 'block'
         }
       } onClick={() => navigate(-1)}>Go back</Button>
-
-      <Button color="secondary" className="btn-bottom" onClick={onHomeClick}>
+      <div className="empty"></div>
+      {/* <Button color="secondary" className="btn-bottom" onClick={onHomeClick}>
         Home
-      </Button>
+      </Button> */}
       <NavbarBottom />
       {/* <Footer /> */}
     </div>
