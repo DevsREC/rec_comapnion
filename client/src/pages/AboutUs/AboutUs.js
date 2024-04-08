@@ -45,6 +45,8 @@ export default function AboutUs() {
                     </div>
                     <div className="club-detail-container">
                         We're dedicated to fostering a vibrant community of developers driven by a shared passion for technology and innovation. Our mission is to empower members to hone their skills, explore their interests, and contribute meaningfully to society through technology. With a focus on web development, app development, game development, UI/UX design, AI/ML, blockchain development, and AR/VR/XR, we provide a platform for collaboration, learning, and problem-solving. Together, we strive to tackle real-world challenges and create value through our collective expertise and creativity.
+                        <br></br>
+                        Special thanks to our esteemed professors <b>Dr.Revathy.P</b> and <b>Ms.D.Sorna Shanthi</b> for their invaluable guidance throughout the development of this project
                     </div>
                     <div className="club-link-container">
                         <div className="social-links-container">
