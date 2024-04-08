@@ -100,3 +100,8 @@ main {
     /* height: 100%; */
     overflow: scroll;
 }
+
+.btn {
+    display: block;
+    margin: 5px auto;
+}

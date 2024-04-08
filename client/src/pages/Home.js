@@ -185,6 +185,9 @@ function Home() {
           <Button className="btn" color="secondary" onClick={() => navigate('/mp')} >
                 Marks
           </Button>
+          <Button className="btn" color="secondary" onClick={() => navigate('/dineout')} >
+                Dine Out
+          </Button>
       </div>
       <div className="empty"></div>
       <NavbarBottom />
