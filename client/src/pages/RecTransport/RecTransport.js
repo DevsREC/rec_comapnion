@@ -80,7 +80,13 @@ export default function RecTransport() {
                 </div>
 
                 <div className="bus-cards-container">
-                    {busCards.length == 0? <p><span>Sunday</span> or <span>Monday</span></p>: busCards}
+                    {busCards.length == 0? 
+                    <>
+                        <div className="rec-transport-holiday-container">
+                            <b>🥳 Holiday! 🥳</b>
+                        </div>
+                    </>
+                    : busCards}
                     <div className="empty"></div>
                 </div>
             </div>
