@@ -1,5 +1,3 @@
-version: "3.8"
-
 # services ports are for debugging
 # while publishing disable them
 # use docker netowrking to connect with other services
@@ -36,25 +34,23 @@ services:
     # depends_on:
     #   - "db"
     #   - "server"
-    environment:
-      WATCHPACK_POLLING: "true"
-    ports:
-      - "3000:3000"
-    expose:
-      - '3000'
+    # ports:
+    #   - "3000:3000"
+    # expose:
+    #   - '3000'
     volumes:
       - ./client/:/app
     networks:
       - public
 
   nginx:
-    image: nginx:1.25
-    depends_on:
-      - "server"
+    image: nginx:1.25.4
+    # depends_on:
+    #   - "server"
     volumes:
       - ./nginx/:/etc/nginx/
     ports:
-      - "8080:80"
+      - "3000:80"
     networks:
       - private
       - public

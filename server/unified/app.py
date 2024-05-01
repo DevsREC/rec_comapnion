@@ -408,10 +408,15 @@ def semester_marks(sem=0):
 
 
 # TODO
-@app.route("/get-attendacne")
-@login_required
-def get_attendance(rollno):
-    person_id = get_id(request.headers)
+@app.route("/get-attendance")
+def get_attendance():
+
+    from datetime import date
+    today = date.today()
+    today = today.strftime("%d-%m-%Y")
+    st_date = "01-10-2023"
+    #person_id = get_id(request.headers)
+    person_id = 21412
 
     cookies = {
         "G_ENABLED_IDPS": "google",
@@ -431,8 +436,8 @@ def get_attendance(rollno):
     }
 
     json_data = {
-        "StartDate": "01-10-2023",
-        "EndDate": "01-11-2023",
+        "StartDate": st_date,
+        "EndDate": today,
         "PersonID": person_id,
     }
 
@@ -445,7 +450,40 @@ def get_attendance(rollno):
     )
     data = response.json()["d"]
     data = json.loads(data)
-    return data
+    print(data)
+
+    periods = [ "Period1", "Period2", "Period3", "Period4", "Period5", "Period6", "Period7", "Period8" ]
+    classes = {}
+    for day in data:
+        for period in periods:
+            if day[period] != '-NE-':
+                tmp = day[period].split('- ')
+                status = tmp[0]
+                class_code = tmp[1]
+
+                if class_code in classes:
+                    classes[class_code]['total'] += 1
+                    if status == 'P':
+                        classes[class_code]['present'] += 1
+                    else:
+                        classes[class_code]['absent'] += 1
+                else:
+                    if status == 'P':
+                        present = 1
+                        absent = 0
+                    else:
+                        present = 0
+                        absent = 1
+                    classes[class_code] = {
+                            "present": present,
+                            "absent": absent,
+                            "total": 1,
+                            }
+
+    for key, val in classes.items():
+        per = float(val['present'])/float(val['total'])*100.0
+        classes[key]['percentage'] = per
+    return classes
 
 def extract_href_from_class(url, class_name):
     try:

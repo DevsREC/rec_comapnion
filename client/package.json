@@ -19,6 +19,7 @@
     "react-router-dom": "^6.19.0",
     "react-router-native": "^6.19.0",
     "react-scripts": "^5.0.1",
+    "serve": "^14.2.1",
     "web-vitals": "^2.1.4",
     "workbox-background-sync": "^6.6.0",
     "workbox-broadcast-update": "^6.6.0",

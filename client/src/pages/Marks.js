@@ -105,13 +105,11 @@ function Marks() {
     },
   ];
 
-  if (data[1] === undefined) {
+  if (Object.keys(data).length === 0 ) {
     return <Audio className='center'/>;
-  }
+}
+console.log(data)
   const no_sems = Object.keys(data).length;
-  if (rows === undefined) {
-    return <h1>Loading</h1>;
-  }
 
   function onHomeClick() {
     navigate('/home');

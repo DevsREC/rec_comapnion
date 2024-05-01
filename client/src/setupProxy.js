@@ -4,7 +4,7 @@ module.exports = function (app) {
   app.use(
     "/api",
     createProxyMiddleware({
-      target: "http://nginx",
+      target: "http://nginx:8080/api",
       pathRewrite: { "^/api": "" },
     }),
   );

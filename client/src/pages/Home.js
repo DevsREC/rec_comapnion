@@ -28,10 +28,10 @@ import Footer from "../components/Footer/Footer";
 import NavbarBottom from "../components/NavbarBottom/NavbarBottom";
 
 //debug
-caches.open("pwa-assets")
-.then(cache => {
-  cache.addAll(["/"]); // it stores two resources
-});
+//caches.open("pwa-assets")
+//.then(cache => {
+//  cache.addAll(["/"]); // it stores two resources
+//});
 
 function Home() {
   // auth
