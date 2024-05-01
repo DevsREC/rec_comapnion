@@ -413,15 +413,57 @@ def semester_marks(sem=0):
 
 # TODO
 @app.route("/get-attendance")
+@login_required
 def get_attendance():
 
     from datetime import date
     today = date.today()
     today = today.strftime("%d-%m-%Y")
-    st_date = "01-10-2023"
-    #person_id = get_id(request.headers)
-    person_id = 21412
+    st_date = "01-01-2024"
+    person_id = get_id(request.headers)
 
+    #####################
+    # GET SUBJECT NAMES #
+    #####################
+    cookies = {
+        'G_ENABLED_IDPS': 'google',
+        'ASP.NET_SessionId': '000000000000000000000000',
+        'dcjq-accordion': '10%2C12',
+    }
+
+    headers = {
+        'Accept': 'application/json, text/javascript, */*; q=0.01',
+        'Accept-Language': 'en-US,en;q=0.9',
+        'Connection': 'keep-alive',
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Origin': 'http://rajalakshmi.in',
+        'Referer': 'http://rajalakshmi.in/UI/Modules/Profile/Profile.aspx?FormHeading=myProfile',
+        'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
+        'X-Requested-With': 'XMLHttpRequest',
+    }
+
+    json_data = {
+        'PersonID': person_id,
+    }
+
+    response = requests.post(
+        'http://rajalakshmi.in/UI/Modules/Profile/Profile.aspx/GetStuCourse',
+        cookies=cookies,
+        headers=headers,
+        json=json_data,
+        verify=False,
+    )
+
+    data = response.json()["d"]
+    data = json.loads(data)
+    print("printing...")
+    subjnames = {}
+    for i in data:
+        subjnames[i['SUBJCODE']] = i['SUBJNAME']
+
+    #####################################################
+    # COMBINE THE SUBJECTNAME WITH ATTENDANCE TILL DATE #
+    #####################################################
     cookies = {
         "G_ENABLED_IDPS": "google",
         "ASP.NET_SessionId": "000000000000000000000000",
@@ -454,7 +496,6 @@ def get_attendance():
     )
     data = response.json()["d"]
     data = json.loads(data)
-    print(data)
 
     periods = [ "Period1", "Period2", "Period3", "Period4", "Period5", "Period6", "Period7", "Period8" ]
     classes = {}
@@ -464,29 +505,33 @@ def get_attendance():
                 tmp = day[period].split('- ')
                 status = tmp[0]
                 class_code = tmp[1]
-
-                if class_code in classes:
-                    classes[class_code]['total'] += 1
-                    if status == 'P':
-                        classes[class_code]['present'] += 1
+                class_code = class_code.replace('(', '')
+                class_code = class_code.replace(')', '')
+                if class_code in subjnames:
+                    if class_code in classes:
+                        classes[class_code]['total'] += 1
+                        if status == 'P':
+                            classes[class_code]['present'] += 1
+                        else:
+                            classes[class_code]['absent'] += 1
                     else:
-                        classes[class_code]['absent'] += 1
-                else:
-                    if status == 'P':
-                        present = 1
-                        absent = 0
-                    else:
-                        present = 0
-                        absent = 1
-                    classes[class_code] = {
-                            "present": present,
-                            "absent": absent,
-                            "total": 1,
-                            }
+                        if status == 'P':
+                            present = 1
+                            absent = 0
+                        else:
+                            present = 0
+                            absent = 1
+                        classes[class_code] = {
+                                "present": present,
+                                "absent": absent,
+                                "total": 1,
+                                }
 
     for key, val in classes.items():
         per = float(val['present'])/float(val['total'])*100.0
         classes[key]['percentage'] = per
+        classes[key]['classname'] = subjnames[key]
+    
     return classes
 
 def extract_href_from_class(url, class_name):
