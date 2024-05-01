@@ -9,6 +9,7 @@ export default function ClubHub() {
         <>
             <Header />
                 <iframe className="club-hub-iframe" src="https://clubhubdevs.vercel.app/"></iframe>
+                <div className="empty"></div>
             <NavbarBottom />
         </>
     )

@@ -35,20 +35,24 @@ ROOT_URL = 'https://www.rectransport.com/'
 # response_to_send = []
 
 def login_required(f):
-    @wraps(f)
-    def decorated_function(*args, **kwargs):
-        print(request.headers)
-        if request.headers["Authorization"]:
-            token = request.headers.get("Authorization")
-            token = token.split()[1]
-            idinfo = id_token.verify_oauth2_token(
-                token, google_req.Request(), CLIENT_ID, clock_skew_in_seconds=10
-            )
-            if idinfo["sub"]:
-                return f(*args, **kwargs), 200
-        return "Try Loging in..", 403
+    try:
+        @wraps(f)
+        def decorated_function(*args, **kwargs):
+            print(request.headers)
+            if request.headers["Authorization"]:
+                token = request.headers.get("Authorization")
+                token = token.split()[1]
+                idinfo = id_token.verify_oauth2_token(
+                    token, google_req.Request(), CLIENT_ID, clock_skew_in_seconds=10
+                )
+                if idinfo["sub"]:
+                    return f(*args, **kwargs), 200
+            return "Try Loging in..", 403
 
-    return decorated_function
+        return decorated_function
+    except Exception:
+        print(Exception)
+        return
 
 
 # todo change to email

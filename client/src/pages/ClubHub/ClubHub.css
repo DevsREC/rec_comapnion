@@ -1,23 +1,16 @@
 .club-hub-iframe {
     display: block;
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: 5px auto;
-    height: 80vh;
-    top: 80px;
+    width: 100%;
+    /* top: 80px; */
+    margin: 80px auto;
+    height: 100vh;
+    bottom: 120px;
+    /* position: fixed; */
     overflow: hidden;
 }
 
 .club-hub-iframe::-webkit-scrollbar
 {
-	width: 10px;
-	background-color: #F5F5F5;
-}
-
-.club-hub-iframe::-webkit-scrollbar-thumb
-{
-	background-color: #000000;
-	border: 2px solid #555555;
+	width: 0px;
+    display: none;
 }
