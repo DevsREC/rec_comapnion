@@ -21,9 +21,9 @@ import { Audio } from "react-loader-spinner";
 //
 
 import './marks.css';
-import Footer from "../components/Footer/Footer";
 import Header from "../components/HeaderTop/Header";
 import NavbarBottom from "../components/NavbarBottom/NavbarBottom";
+import Attendance from "../pages/Attendance";
 
 function Marks() {
   // auth
@@ -83,6 +83,8 @@ function Marks() {
   // pagination just changes the `key` value
   // useing useState
   const rows = useMemo(() => {
+    console.log("Fuckking: ")
+    console.log(data?.[sempage]?.[catpage]);
     return data?.[sempage]?.[catpage];
   }, [data, catpage, sempage]);
   //debug

@@ -18,7 +18,7 @@
 # ENV CI=false
 # ENV PORT=3000
 
-# #CMD [ "npm", "start" ]
+# CMD [ "npm", "start" ]
 
 # build environment
 FROM node:alpine as build

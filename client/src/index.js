@@ -26,6 +26,7 @@ import NavbarBottom from "./components/NavbarBottom/NavbarBottom";
 import MarksPage from "./pages/MarksPage/MarksPage";
 import ClubHub from "./pages/ClubHub/ClubHub";
 import Dineout from "./pages/Dineout/Dineout";
+import Attendance from "./pages/Attendance";
 
 // caches.open("pwa-assets")
 // .then(cache => {
@@ -57,6 +58,11 @@ const router = createBrowserRouter([
   {
     path: "/grade",
     element: <Grade />,
+    loader: Audio,
+  },
+  {
+    path: "/attendance",
+    element: <Attendance />,
     loader: Audio,
   },
   {

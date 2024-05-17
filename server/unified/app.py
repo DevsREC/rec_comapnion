@@ -235,7 +235,12 @@ def internal_marks():
         2:[...]
     }
     """
-    mod_data = {}
+    """
+    creates mod_data with
+    8 semesters
+    3 internal cats in each
+    """
+    mod_data = {i:[[] for _ in range(3) ] for i in range(1, 9)}
     for test in data:
         """
             'CATEST1'
@@ -290,14 +295,14 @@ def internal_marks():
             if test_sem in mod_data.keys():
                 if total:
                     mod_data[test_sem][cat_no].append(test)
-            else:
-                mod_data[test_sem] = [
-                    [],  # cat 1
-                    [],  # cat 2
-                    [],  # cat 3
-                ]
-                if total:
-                    mod_data[test_sem][cat_no].append(test)
+            # else:
+            #     mod_data[test_sem] = [
+            #         [],  # cat 1
+            #         [],  # cat 2
+            #         [],  # cat 3
+            #     ]
+            #     if total:
+            #         mod_data[test_sem][cat_no].append(test)
 
     return mod_data
 
@@ -415,12 +420,12 @@ def semester_marks(sem=0):
 @app.route("/get-attendance")
 @login_required
 def get_attendance():
+    person_id = get_id(request.headers)
 
     from datetime import date
     today = date.today()
     today = today.strftime("%d-%m-%Y")
     st_date = "01-01-2024"
-    person_id = get_id(request.headers)
 
     #####################
     # GET SUBJECT NAMES #
@@ -529,10 +534,21 @@ def get_attendance():
 
     for key, val in classes.items():
         per = float(val['present'])/float(val['total'])*100.0
+        per = round(per, 2)
         classes[key]['percentage'] = per
         classes[key]['classname'] = subjnames[key]
-    
-    return classes
+        
+    mod_data = []
+    for key, val in classes.items():
+        mod_data.append({
+                "SubjName": key,
+                "present": val['present'],
+                "absent": val['absent'],
+                "percentage": val['percentage'],
+                "total": val['total']
+                })
+
+    return mod_data
 
 def extract_href_from_class(url, class_name):
     try:
@@ -622,7 +638,7 @@ def start_scheduler():
 # getBus()
 
 if __name__ == "__main__":
-    start_scheduler()
-    busResponse = getBus()
+    #start_scheduler()
+    #busResponse = getBus()
     app.run(host="0.0.0.0", port=5000, debug=True)
     app.run(use_reloader=True)

@@ -36,10 +36,8 @@ services:
     #   - "server"
     # ports:
     #   - "3000:3000"
-    # expose:
-    #   - '3000'
-    volumes:
-      - ./client/:/app
+    # volumes:
+    #   - ./client/:/app
     networks:
       - public
 
