@@ -33,6 +33,8 @@ app.config["JWT_HEADER_TYPE"] = "Bearer"
 # For Rec transport
 ROOT_URL = 'https://www.rectransport.com/'
 # response_to_send = []
+busResponse = []
+lastfetchedDate = -1
 
 def login_required(f):
     try:
@@ -630,21 +632,22 @@ def getBus():
         return l
     return []
 
-busResponse = []
-
 @app.route('/get-bus')
 def getBus1():
+    global busResponse, lastfetchedDate 
+    if busResponse == [] and lastfetchedDate != datetime.now().strftime('%d'):
+        print('Updating bus details')
+        busResponse = getBus()
     return busResponse
 
 def start_scheduler():
+    print('Scheduler started')
     scheduler = BackgroundScheduler(daemon=True)
-    scheduler.add_job(getBus, CronTrigger(hour=0))
+    scheduler.add_job(getBus1, CronTrigger(hour=0))
     scheduler.start()
-    
-# getBus()
 
-if __name__ == "__main__":
-    #start_scheduler()
-    #busResponse = getBus()
+if __name__ == "__main__":    
+    start_scheduler()
+    busResponse = getBus1()
     app.run(host="0.0.0.0", port=5000, debug=True)
     app.run(use_reloader=True)
