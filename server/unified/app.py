@@ -412,6 +412,11 @@ def semester_marks(sem=0):
         else:
             mod_data[sem["Semester"]] = []
             mod_data[sem["Semester"]].append(sem)
+    for i in range(1, 9):
+        i = str(i)
+        if i in mod_data.keys():
+            break
+        mod_data[i] = []
 
     return mod_data
 
@@ -542,6 +547,7 @@ def get_attendance():
     for key, val in classes.items():
         mod_data.append({
                 "SubjName": key,
+                "classname": val['classname'],
                 "present": val['present'],
                 "absent": val['absent'],
                 "percentage": val['percentage'],

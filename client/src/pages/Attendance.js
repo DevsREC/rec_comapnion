@@ -98,6 +98,10 @@ function Attendance() {
   const columns = [
     {
       key: "SubjName",
+      label: "Subject Code",
+    },
+    {
+      key: "classname",
       label: "Subject Name",
     },
     {
