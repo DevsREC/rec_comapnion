@@ -14,6 +14,13 @@ import Grade from "./pages/Grade";
 
 import { Audio } from "react-loader-spinner";
 
+import ReactGa from 'react-ga';
+
+
+const TRACKING_ID = 'G-CEG1ETDGYE';
+
+ReactGa.initialize(TRACKING_ID);
+
 import {
   createBrowserRouter,
   RouterProvider,
