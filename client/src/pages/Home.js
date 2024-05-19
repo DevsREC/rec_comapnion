@@ -18,7 +18,7 @@ import { useNavigate } from "react-router-dom";
 
 import { Audio } from "react-loader-spinner";
 import Logout from "../components/Logout"
-import ReactGa from 'react-ga';
+import ReactGA from 'react-ga4';
 
 import Marks from "./Marks";
 import Grade from "./Grade";
@@ -53,7 +53,12 @@ function Home() {
 
   // Google analytics
   useEffect(() => {
-    ReactGa.pageview(window.location.pathname)
+    ReactGA.send(
+      {
+        hitType: 'pageview',
+        page: window.location.pathname
+      }
+    )
   }, [])
 
   const [data, setData] = useState({});
