@@ -77,6 +77,7 @@ function Home() {
           })
           .catch(function(error) {
             console.log(error);
+            alert('Either Unified is down or Something went wrong in our side, Try again later 👋!')
             localStorage.clear();
             navigate("/login");
           })

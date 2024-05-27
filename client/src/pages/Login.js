@@ -9,7 +9,6 @@ import logo_pic from "../img/logo.png";
 import rec_logo from '../img/reclogo.png'
 import comp_logo from '../img/rec_comp_logo.png'
 
-
 import './login.css';
 
 function Login() {
@@ -48,9 +47,9 @@ function Login() {
 
     }
   }
-    const errorMessage = (error) => {
-        console.log(error);
-    };
+  const errorMessage = (error) => {
+    console.log(error);
+  };
 
   return (
     <div className="dark w-full h-full login" style={{colorScheme: 'light'}}>
