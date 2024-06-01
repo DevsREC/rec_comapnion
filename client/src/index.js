@@ -16,11 +16,6 @@ import { Audio } from "react-loader-spinner";
 
 import ReactGA from 'react-ga4';
 
-
-const TRACKING_ID = 'G-CEG1ETDGYE';
-
-ReactGA.initialize(TRACKING_ID);
-
 import {
   createBrowserRouter,
   RouterProvider,
@@ -34,6 +29,11 @@ import MarksPage from "./pages/MarksPage/MarksPage";
 import ClubHub from "./pages/ClubHub/ClubHub";
 import Dineout from "./pages/Dineout/Dineout";
 import Attendance from "./pages/Attendance";
+
+const TRACKING_ID = 'G-CEG1ETDGYE';
+
+ReactGA.initialize(TRACKING_ID);
+
 
 // caches.open("pwa-assets")
 // .then(cache => {

@@ -1,6 +1,8 @@
 from flask import Flask, request
 from flask_cors import CORS
 
+import logging
+
 import requests
 from bs4 import BeautifulSoup
 from datetime import datetime, timedelta
@@ -29,6 +31,8 @@ app.config["JWT_TOKEN_LOCATION"] = "headers"
 app.config["JWT_HEADER_NAME"] = "Authorization"
 app.config["JWT_HEADER_TYPE"] = "Bearer"
 
+# Log config
+logging.basicConfig(filename='app.log', level=logging.INFO)
 
 # For Rec transport
 ROOT_URL = 'https://www.rectransport.com/'
@@ -47,7 +51,9 @@ def login_required(f):
                 idinfo = id_token.verify_oauth2_token(
                     token, google_req.Request(), CLIENT_ID, clock_skew_in_seconds=10
                 )
+                
                 if idinfo["sub"]:
+                    app.logger.info(f'{idinfo['sub']} - Logined - {datetime.now()}')
                     return f(*args, **kwargs), 200
             return "Try Loging in..", 403
 
@@ -56,6 +62,23 @@ def login_required(f):
         print(Exception)
         return
 
+def countUsers(mf):
+    with open(mf) as f:
+        login_set = set()
+        for l in f:
+            if 'Logined' in l:
+                try:
+                    user_id = l.split()[0]
+                    login_set.add(user_id)
+                except:
+                    pass
+    return len(login_set)
+
+
+@app.route('/get-user-count')
+def get_user_count():
+    res = countUsers('app.log')
+    return {"count": res}
 
 # todo change to email
 def get_id(header):
@@ -617,7 +640,7 @@ def getBus():
     print(today_date)
     # tomorrow_date = (datetime.now() + timedelta(days=1)).strftime('%d')
     this_month = datetime.now().strftime('%b').lower()
-    
+    lastfetchedDate = today_date
     url1 = "https://www.rectransport.com/" + str(this_month) + str(today_date) + '.php'
     class_name = "info"
     print(url1)
@@ -635,7 +658,7 @@ def getBus():
 @app.route('/get-bus')
 def getBus1():
     global busResponse, lastfetchedDate 
-    if busResponse == [] and lastfetchedDate != datetime.now().strftime('%d'):
+    if lastfetchedDate != datetime.now().strftime('%d'):
         print('Updating bus details')
         busResponse = getBus()
     return busResponse
