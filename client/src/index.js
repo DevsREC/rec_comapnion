@@ -4,27 +4,23 @@ import "./index.css";
 
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import reportWebVitals from "./reportWebVitals";
+
 import { NextUIProvider } from "@nextui-org/react";
 import { GoogleOAuthProvider } from '@react-oauth/google';
+import { Audio } from "react-loader-spinner";
+import ReactGA from 'react-ga4';
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
 
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Marks from "./pages/Marks";
 import Grade from "./pages/Grade";
-
-import { Audio } from "react-loader-spinner";
-
-import ReactGA from 'react-ga4';
-
-import {
-  createBrowserRouter,
-  RouterProvider,
-  BrowserRouter,
-} from "react-router-dom";
 import Rec360 from "./pages/rec360/Rec360";
 import AboutUs from "./pages/AboutUs/AboutUs";
 import RecTransport from "./pages/RecTransport/RecTransport";
-import NavbarBottom from "./components/NavbarBottom/NavbarBottom";
 import MarksPage from "./pages/MarksPage/MarksPage";
 import ClubHub from "./pages/ClubHub/ClubHub";
 import Dineout from "./pages/Dineout/Dineout";

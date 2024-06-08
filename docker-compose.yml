@@ -34,6 +34,8 @@ services:
     # depends_on:
     #   - "db"
     #   - "server"
+    # environment:
+    #   WATCHPACK_POLLING: "true"
     # ports:
     #   - "3000:3000"
     # volumes:
@@ -48,7 +50,7 @@ services:
     volumes:
       - ./nginx/:/etc/nginx/
     ports:
-      - "3000:80"
+      - "8080:80"
     networks:
       - private
       - public

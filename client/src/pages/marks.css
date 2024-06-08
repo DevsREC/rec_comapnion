@@ -1,4 +1,3 @@
-
 .btn-bottom {
     display: block;
     margin: 10px auto;
@@ -6,4 +5,12 @@
 
 .marks-table {
     margin-top: 70px;
+}
+
+.tab-mark {
+    margin-top: 80px;
+}
+
+.tabs-mark {
+    margin: 10px auto;
 }

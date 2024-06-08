@@ -35,14 +35,13 @@ main {
     max-height: 600px;
     padding: 5px;
     overflow: hidden;
-    border-radius: 10px;
+    border-radius: 2px;
 }
 
 .basic-detail-bg {
     display: block;
     width: 100% !important;
     object-fit: cover;
-    filter: blur(15px);
     z-index: 4;
 }
 
@@ -75,6 +74,7 @@ main {
     top: 0;
     place-items: center;
     z-index: 11;
+    backdrop-filter: blur(20px);
 }
 
 .person-val-cont {

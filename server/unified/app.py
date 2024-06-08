@@ -265,7 +265,7 @@ def internal_marks():
     8 semesters
     3 internal cats in each
     """
-    mod_data = {i:[[] for _ in range(3) ] for i in range(1, 9)}
+    mod_data = {i:[[] for _ in range(4) ] for i in range(1, 9)}
     for test in data:
         """
             'CATEST1'
@@ -328,6 +328,16 @@ def internal_marks():
             #     ]
             #     if total:
             #         mod_data[test_sem][cat_no].append(test)
+        elif 'ASSIGNMENT' in test['EventTitle']:
+            sem = int(test['Semester'])
+            sub_name = test['SubjName']
+            mod_data[sem][3].append(
+                {
+                    'semester': sem,
+                    'subjectName': sub_name,
+                    'totalMarks': test['Total']
+                }
+            )
 
     return mod_data
 
@@ -633,6 +643,8 @@ def get_route_details(route_url):
         # print(e)
         return None
     
+busResponse = []
+
 def getBus():
     print('I\'m running')
     # today_date = (datetime.now() + timedelta(days=1)).strftime('%d')
@@ -640,7 +652,7 @@ def getBus():
     print(today_date)
     # tomorrow_date = (datetime.now() + timedelta(days=1)).strftime('%d')
     this_month = datetime.now().strftime('%b').lower()
-    lastfetchedDate = today_date
+    
     url1 = "https://www.rectransport.com/" + str(this_month) + str(today_date) + '.php'
     class_name = "info"
     print(url1)
@@ -652,25 +664,24 @@ def getBus():
             route_url = ROOT_URL + '/' + i
             d = get_route_details(route_url)
             l.append(d)
+        busResponse = l
         return l
+    busResponse = []
     return []
+
 
 @app.route('/get-bus')
 def getBus1():
-    global busResponse, lastfetchedDate 
-    if lastfetchedDate != datetime.now().strftime('%d'):
-        print('Updating bus details')
-        busResponse = getBus()
     return busResponse
 
 def start_scheduler():
     print('Scheduler started')
     scheduler = BackgroundScheduler(daemon=True)
-    scheduler.add_job(getBus1, CronTrigger(hour=0))
+    scheduler.add_job(getBus1, CronTrigger(hour=23))
     scheduler.start()
 
 if __name__ == "__main__":    
     start_scheduler()
-    busResponse = getBus1()
+    busResponse = getBus()
     app.run(host="0.0.0.0", port=5000, debug=True)
     app.run(use_reloader=True)
